@@ -15,19 +15,26 @@ class App extends Component {
   }
 
   componentDidMount(): void {
-    this.setState({ ...this.state, data: getBurgerIngredient() })
+    setTimeout(() => {
+      this.setState({ ...this.state, data: getBurgerIngredient() })
+    }, 750);
+    
   }
 
   render() {
+    const content = this.state.data.length === 0
+      ? <h3 style={{ textAlign: 'center' }} className='text text_type_main-large mb-5'>Загрузка данных</h3>
+      : <main>
+        <div className={appStyle.container}>
+          <BurgerIngredients data={ this.state.data } />
+          <BurgerConstructor data={ this.state.data } />
+        </div>
+      </main>;
+
     return (
       <div className={appStyle.app}>
         <AppHeader />
-        <main>
-          <div className={appStyle.container}>
-            <BurgerIngredients data={ this.state.data } />
-            <BurgerConstructor />
-          </div>
-        </main>
+        { content }
       </div>
     );
   }
