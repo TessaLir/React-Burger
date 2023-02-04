@@ -9,14 +9,25 @@ interface IProps {
 }
 
 class MenuElement extends Component<IProps> {
+    
+    state = {
+        isActive: false
+    }
+
+    componentDidMount(): void {
+        if (this.props.isActive) {
+            this.setState({ ...this.state, isActive: true });
+        }
+    }
+
     render() {
-        const { children, text, isActive } = this.props;
+        const { children, text } = this.props;
         return <>
             <li className={`${menuElementStyle.item} p-5`}>
                 { children }
                 <p 
                     className='text text_type_main-default ml-2' 
-                    style={{ color: isActive ? '#F2F2F3' : '#8585AD' }} 
+                    style={{ color: this.state.isActive ? '#F2F2F3' : '#8585AD' }} 
                 >
                     { text }
                 </p>
