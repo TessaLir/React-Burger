@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import burgerConstructor from './burger-constructor.module.css';
+import burgerConstructorStyle from './burger-constructor.module.css';
 
 class BurgerConstructor extends Component {
     render() {
-        return <h1>BurgerConstructor</h1>;
+        return <article style={{ width: '600px', backgroundColor: 'red' }} className='pt-25 pl-4 pr-4'>
+            123
+        </article>;
     }
 }
 

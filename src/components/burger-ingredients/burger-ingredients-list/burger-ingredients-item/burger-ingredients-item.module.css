@@ -1,0 +1,26 @@
+.ingredient {
+    position: relative;
+    width: 268px;
+}
+
+.ingredient_top {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.ingredient_image {
+    width: 240px;
+    height: 120px;
+}
+
+.ingredient_price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredient_name {
+    height: 48px;
+    width: 100%;
+    text-align: center;
+}
