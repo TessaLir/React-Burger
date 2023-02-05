@@ -73,10 +73,9 @@ class BurgerConstructor extends Component<IProps> {
         className={`${burgerConstructorStyle.container} pt-25 pl-4 pr-4`}
       >
         <section className={burgerConstructorStyle.ingredients} style={{}}>
-          {this.state.selectedIngridient.slice(0, 1).map((item) => (
-            <section className="pl-8 pr-8">
+          {this.state.selectedIngridient.slice(0, 1).map((item, index) => (
+            <section key={`${item._id}-${index}`} className="pl-8 pr-8">
               <ConstructorElement
-                key={item._id}
                 type="top"
                 isLocked={true}
                 extraClass={burgerConstructorStyle.element}
@@ -89,14 +88,14 @@ class BurgerConstructor extends Component<IProps> {
           <div className={burgerConstructorStyle.ingredients_inners}>
             {this.state.selectedIngridient
               .slice(1, ingredientLength - 1)
-              .map((item) => (
+              .map((item, index) => (
                 <section
+                  key={`${item._id}-${index}`}
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
                   className="pr-4"
                 >
                   <DragIcon type="primary" />
                   <ConstructorElement
-                    key={item._id}
                     extraClass={burgerConstructorStyle.element}
                     text={item.name}
                     price={item.price}
@@ -107,10 +106,9 @@ class BurgerConstructor extends Component<IProps> {
           </div>
           {this.state.selectedIngridient
             .slice(ingredientLength - 1, ingredientLength)
-            .map((item) => (
-              <section className="pl-8 pr-8">
+            .map((item, index) => (
+              <section key={`${item._id}-${index}`} className="pl-8 pr-8">
                 <ConstructorElement
-                  key={item._id}
                   type="bottom"
                   isLocked={true}
                   extraClass={burgerConstructorStyle.element}
