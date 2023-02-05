@@ -1,12 +1,13 @@
+import React, { Component } from "react";
+
 import {
   Button,
   ConstructorElement,
   CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { Component } from "react";
-import IBurderIngredient from "../../models/byrger-ingredient";
 
+import IBurderIngredient from "../../models/byrger-ingredient";
 import burgerConstructorStyle from "./burger-constructor.module.css";
 
 interface IProps {
