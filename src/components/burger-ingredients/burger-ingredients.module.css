@@ -1,0 +1,28 @@
+.content {
+  width: 600px;
+}
+
+.list {
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.title {
+  font-size: 40px;
+}
+
+.tabs {
+  display: flex;
+}
