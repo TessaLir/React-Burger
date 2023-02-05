@@ -5,7 +5,7 @@ import {
 
 import IBurderIngredient from "../../../../models/byrger-ingredient";
 
-import style from "./burger-ingredients-item.module.css";
+import styleClass from "./burger-ingredients-item.module.css";
 
 interface IProps {
   item: IBurderIngredient;
@@ -21,18 +21,18 @@ const BurgerIngredientsItem = (props: IProps) => {
   const { _id, name, price, image } = props.item;
 
   return (
-    <article className={`${style.ingredient} mt-6 mb-10 ml-4 mr-3`}>
-      <div className={`${style.ingredient_top} pb-1 pl-4 pr-4`}>
+    <article className={`${styleClass.ingredient} mt-6 mb-10 ml-4 mr-3`}>
+      <div className={`${styleClass.ingredient_top} pb-1 pl-4 pr-4`}>
         {!hasCounter.includes(_id) ? null : (
           <Counter count={1} size="default" extraClass="m1" />
         )}
-        <img className={style.ingredient_image} src={image} alt={_id} />
-        <div className={style.ingredient_price}>
+        <img className={styleClass.ingredient_image} src={image} alt={_id} />
+        <div className={styleClass.ingredient_price}>
           <p className="text text_type_digits-default mr-2">{price}</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>
-      <div className={style.ingredient_name}>
+      <div className={styleClass.ingredient_name}>
         <p className="text text_type_main-small">{name}</p>
       </div>
     </article>

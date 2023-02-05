@@ -6,7 +6,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 
 import { getBurgerIngredient } from "../../api/burger-api";
 
-import appStyle from "./App.module.css";
+import styleClass from "./App.module.css";
 
 class App extends Component {
   state = {
@@ -23,13 +23,13 @@ class App extends Component {
     const content =
       this.state.data.length === 0 ? (
         <h3
-          className={`text text_type_main-large mb-5 ${appStyle.loading_text}`}
+          className={`text text_type_main-large mb-5 ${styleClass.loading_text}`}
         >
           Загрузка данных
         </h3>
       ) : (
         <main>
-          <div className={appStyle.container}>
+          <div className={styleClass.container}>
             <BurgerIngredients data={this.state.data} />
             <BurgerConstructor data={this.state.data} />
           </div>
@@ -37,7 +37,7 @@ class App extends Component {
       );
 
     return (
-      <div className={appStyle.app}>
+      <div className={styleClass.app}>
         <AppHeader />
         {content}
       </div>

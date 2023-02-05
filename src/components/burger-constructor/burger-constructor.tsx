@@ -8,7 +8,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import IBurderIngredient from "../../models/byrger-ingredient";
-import burgerConstructorStyle from "./burger-constructor.module.css";
+
+import styleClass from "./burger-constructor.module.css";
 
 interface IProps {
   data: IBurderIngredient[];
@@ -69,7 +70,7 @@ class BurgerConstructor extends Component<IProps> {
     if (!this.state.fixedBun)
       return (
         <h3
-          className={`text text_type_main-large mb-5 ${burgerConstructorStyle.attention_text}`}
+          className={`text text_type_main-large mb-5 ${styleClass.attention_text}`}
         >
           что то не найдена булочка
         </h3>
@@ -77,33 +78,31 @@ class BurgerConstructor extends Component<IProps> {
     const ingredientLength = this.state.selectedIngridient.length;
 
     return (
-      <article
-        className={`${burgerConstructorStyle.container} pt-25 pl-4 pr-4`}
-      >
-        <section className={burgerConstructorStyle.ingredients}>
+      <article className={`${styleClass.container} pt-25 pl-4 pr-4`}>
+        <section className={styleClass.ingredients}>
           {this.state.selectedIngridient.slice(0, 1).map((item, index) => (
             <section key={`${item._id}-${index}`} className="pl-8 pr-8">
               <ConstructorElement
                 type="top"
                 isLocked={true}
-                extraClass={burgerConstructorStyle.element}
+                extraClass={styleClass.element}
                 text={`${item.name} (верх)`}
                 price={item.price}
                 thumbnail={item.image}
               />
             </section>
           ))}
-          <div className={burgerConstructorStyle.ingredients_inners}>
+          <div className={styleClass.ingredients_inners}>
             {this.state.selectedIngridient
               .slice(1, ingredientLength - 1)
               .map((item, index) => (
                 <section
                   key={`${item._id}-${index}`}
-                  className={`${burgerConstructorStyle.drawable_element} pr-4`}
+                  className={`${styleClass.drawable_element} pr-4`}
                 >
                   <DragIcon type="primary" />
                   <ConstructorElement
-                    extraClass={burgerConstructorStyle.element}
+                    extraClass={styleClass.element}
                     text={item.name}
                     price={item.price}
                     thumbnail={item.image}
@@ -118,7 +117,7 @@ class BurgerConstructor extends Component<IProps> {
                 <ConstructorElement
                   type="bottom"
                   isLocked={true}
-                  extraClass={burgerConstructorStyle.element}
+                  extraClass={styleClass.element}
                   text={`${item.name} (низ)`}
                   price={item.price}
                   thumbnail={item.image}
@@ -127,8 +126,8 @@ class BurgerConstructor extends Component<IProps> {
             ))}
         </section>
 
-        <section className={`${burgerConstructorStyle.payment} mt-10 pr-10`}>
-          <div className={`${burgerConstructorStyle.payment_currency} mr-10`}>
+        <section className={`${styleClass.payment} mt-10 pr-10`}>
+          <div className={`${styleClass.payment_currency} mr-10`}>
             <p className="text text_type_digits-default pr-2">
               {this.state.selectedIngridient.reduce(
                 (summ, item) => summ + item.price,

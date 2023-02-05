@@ -8,7 +8,7 @@ import {
 import IMenuItem from "../../models/menu-item";
 import MenuList from "./menu-list/menu-list";
 
-import appHeaderStyle from "./app-header.module.css";
+import styleClass from "./app-header.module.css";
 
 // TODO потом можно будет использовать в состоянии, пока что просто как константа.
 // переносить в SD не стал, так как используется пока только тут.
@@ -31,10 +31,10 @@ const menuItems: IMenuItem[] = [
 
 const AppHeader = () => {
   return (
-    <header className={appHeaderStyle.header}>
-      <nav className={`${appHeaderStyle.nav} pt-4 pb-4`}>
+    <header className={styleClass.header}>
+      <nav className={`${styleClass.nav} pt-4 pb-4`}>
         <MenuList menuList={menuItems} />
-        <div className={appHeaderStyle.logo}>
+        <div className={styleClass.logo}>
           <Logo />
         </div>
         <MenuList menuList={menuItems} isRightMenu={true} />

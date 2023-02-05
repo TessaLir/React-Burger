@@ -4,7 +4,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IBurderIngredient from "../../models/byrger-ingredient";
 import BurgerIngredientsList from "./burger-ingredients-list/burger-ingredients-list";
 
-import burgerIngredientsStyle from "./burger-ingredients.module.css";
+import styleClass from "./burger-ingredients.module.css";
 
 interface IProps {
   data: IBurderIngredient[];
@@ -38,14 +38,12 @@ class BurgerIngredients extends Component<IProps> {
     const { current } = this.state;
 
     return (
-      <article className={`${burgerIngredientsStyle.content} pt-10`}>
-        <h3
-          className={`${burgerIngredientsStyle.title} text text_type_main-large mb-5`}
-        >
+      <article className={`${styleClass.content} pt-10`}>
+        <h3 className={`${styleClass.title} text text_type_main-large mb-5`}>
           Соберите бургер
         </h3>
 
-        <section className={`${burgerIngredientsStyle.tabs} mb-10`}>
+        <section className={`${styleClass.tabs} mb-10`}>
           {this.tabs.map((tab) => (
             <Tab
               key={tab.key}
@@ -58,7 +56,7 @@ class BurgerIngredients extends Component<IProps> {
           ))}
         </section>
 
-        <section className={burgerIngredientsStyle.list}>
+        <section className={styleClass.list}>
           {this.tabs.map((tab) => (
             <BurgerIngredientsList
               key={tab.key}
