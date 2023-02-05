@@ -15,26 +15,24 @@ class MenuList extends Component<IProps> {
     const { menuList, isRightMenu } = this.props;
 
     return (
-      <>
-        <ul
-          className={menuListStyle.menu}
-          style={{ justifyContent: isRightMenu ? "end" : "start" }}
-        >
-          {menuList
-            .filter((item) => item.isRightMenu === isRightMenu)
-            .map((item, index) => {
-              return (
-                <MenuElement
-                  key={`menu-item-${index}`}
-                  text={item.text}
-                  isActive={item.isActive}
-                >
-                  {item.icon}
-                </MenuElement>
-              );
-            })}
-        </ul>
-      </>
+      <ul
+        className={menuListStyle.menu}
+        style={{ justifyContent: isRightMenu ? "end" : "start" }}
+      >
+        {menuList
+          .filter((item) => item.isRightMenu === isRightMenu)
+          .map((item, index) => {
+            return (
+              <MenuElement
+                key={`menu-item-${index}`}
+                text={item.text}
+                isActive={item.isActive}
+              >
+                {item.icon}
+              </MenuElement>
+            );
+          })}
+      </ul>
     );
   }
 }

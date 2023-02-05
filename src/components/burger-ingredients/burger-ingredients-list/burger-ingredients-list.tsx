@@ -15,16 +15,14 @@ class BurgerIngredientsList extends Component<IProps> {
     const { data, title } = this.props;
 
     return (
-      <>
-        <article>
-          <h3 className="text text_type_main-large mb-5">{title}</h3>
-          <section className={style.list}>
-            {data.map((item) => (
-              <BurgerIngredientsItem key={item._id} item={item} />
-            ))}
-          </section>
-        </article>
-      </>
+      <article>
+        <h3 className="text text_type_main-large mb-5">{title}</h3>
+        <section className={style.list}>
+          {data.map((item) => (
+            <BurgerIngredientsItem key={item._id} item={item} />
+          ))}
+        </section>
+      </article>
     );
   }
 }

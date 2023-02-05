@@ -22,17 +22,15 @@ class MenuElement extends Component<IProps> {
   render() {
     const { children, text } = this.props;
     return (
-      <>
-        <li className={`${menuElementStyle.item} p-5`}>
-          {children}
-          <p
-            className="text text_type_main-default ml-2"
-            style={{ color: this.state.isActive ? "#F2F2F3" : "#8585AD" }}
-          >
-            {text}
-          </p>
-        </li>
-      </>
+      <li className={`${menuElementStyle.item} p-5`}>
+        {children}
+        <p
+          className="text text_type_main-default ml-2"
+          style={{ color: this.state.isActive ? "#F2F2F3" : "#8585AD" }}
+        >
+          {text}
+        </p>
+      </li>
     );
   }
 }

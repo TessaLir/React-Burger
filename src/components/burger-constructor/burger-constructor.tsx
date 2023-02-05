@@ -65,7 +65,7 @@ class BurgerConstructor extends Component<IProps> {
 
   render() {
     // TODO возможно надо бы пробросить ошибку, или что то подобное.
-    if (!this.state.fixedBun) return <>что то не найдена булочка</>;
+    if (!this.state.fixedBun) return <h3 className="text text_type_main-large mb-5" style={{ color: 'red' }}>что то не найдена булочка</h3>;
     const ingredientLength = this.state.selectedIngridient.length;
 
     return (
