@@ -21,13 +21,13 @@ class MenuElement extends Component<IProps> {
 
   render() {
     const { children, text } = this.props;
+    const textClass = this.state.isActive
+      ? `${menuElementStyle.active}`
+      : `${menuElementStyle.inactive}`;
     return (
       <li className={`${menuElementStyle.item} p-5`}>
         {children}
-        <p
-          className="text text_type_main-default ml-2"
-          style={{ color: this.state.isActive ? "#F2F2F3" : "#8585AD" }}
-        >
+        <p className={`text text_type_main-default ml-2 ${textClass}`}>
           {text}
         </p>
       </li>

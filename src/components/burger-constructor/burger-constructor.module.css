@@ -43,3 +43,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.attention_text {
+    color: red;
+}
+
+.drawable_element {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

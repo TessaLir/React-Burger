@@ -13,12 +13,12 @@ interface IProps {
 class MenuList extends Component<IProps> {
   render() {
     const { menuList, isRightMenu } = this.props;
+    const memuPositionClass = isRightMenu
+      ? `${menuListStyle.menu_right}`
+      : `${menuListStyle.menu_left}`;
 
     return (
-      <ul
-        className={menuListStyle.menu}
-        style={{ justifyContent: isRightMenu ? "end" : "start" }}
-      >
+      <ul className={`${menuListStyle.menu} ${memuPositionClass}`}>
         {menuList
           .filter((item) => item.isRightMenu === isRightMenu)
           .map((item, index) => {

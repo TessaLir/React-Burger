@@ -6,3 +6,11 @@
 .item:hover {
     cursor: pointer;
 }
+
+.active {
+    color: #F2F2F3;
+}
+
+.inactive {
+    color: #8585AD;
+}

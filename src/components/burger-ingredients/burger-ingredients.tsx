@@ -40,13 +40,12 @@ class BurgerIngredients extends Component<IProps> {
     return (
       <article className={`${burgerIngredientsStyle.content} pt-10`}>
         <h3
-          style={{ fontSize: "40px" }}
           className={`${burgerIngredientsStyle.title} text text_type_main-large mb-5`}
         >
           Соберите бургер
         </h3>
 
-        <section style={{ display: "flex" }} className="mb-10">
+        <section className={`${burgerIngredientsStyle.tabs} mb-10`}>
           {this.tabs.map((tab) => (
             <Tab
               key={tab.key}
@@ -59,10 +58,7 @@ class BurgerIngredients extends Component<IProps> {
           ))}
         </section>
 
-        <section
-          className={burgerIngredientsStyle.list}
-          style={{ maxHeight: "700px", overflowY: "scroll" }}
-        >
+        <section className={burgerIngredientsStyle.list}>
           {this.tabs.map((tab) => (
             <BurgerIngredientsList
               key={tab.key}

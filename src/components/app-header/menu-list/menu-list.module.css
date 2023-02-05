@@ -3,3 +3,11 @@
     margin: 0;
     padding: 0;
 }
+
+.menu_left {
+    justify-content: start;
+}
+
+.menu_right {
+    justify-content: end;
+}

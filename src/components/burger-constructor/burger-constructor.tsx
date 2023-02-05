@@ -65,14 +65,21 @@ class BurgerConstructor extends Component<IProps> {
 
   render() {
     // TODO возможно надо бы пробросить ошибку, или что то подобное.
-    if (!this.state.fixedBun) return <h3 className="text text_type_main-large mb-5" style={{ color: 'red' }}>что то не найдена булочка</h3>;
+    if (!this.state.fixedBun)
+      return (
+        <h3
+          className={`text text_type_main-large mb-5 ${burgerConstructorStyle.attention_text}`}
+        >
+          что то не найдена булочка
+        </h3>
+      );
     const ingredientLength = this.state.selectedIngridient.length;
 
     return (
       <article
         className={`${burgerConstructorStyle.container} pt-25 pl-4 pr-4`}
       >
-        <section className={burgerConstructorStyle.ingredients} style={{}}>
+        <section className={burgerConstructorStyle.ingredients}>
           {this.state.selectedIngridient.slice(0, 1).map((item, index) => (
             <section key={`${item._id}-${index}`} className="pl-8 pr-8">
               <ConstructorElement
@@ -91,8 +98,7 @@ class BurgerConstructor extends Component<IProps> {
               .map((item, index) => (
                 <section
                   key={`${item._id}-${index}`}
-                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
-                  className="pr-4"
+                  className={`${burgerConstructorStyle.drawable_element} pr-4`}
                 >
                   <DragIcon type="primary" />
                   <ConstructorElement

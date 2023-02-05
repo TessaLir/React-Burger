@@ -23,8 +23,7 @@ class App extends Component {
     const content =
       this.state.data.length === 0 ? (
         <h3
-          style={{ textAlign: "center" }}
-          className="text text_type_main-large mb-5"
+          className={`text text_type_main-large mb-5 ${appStyle.loading_text}`}
         >
           Загрузка данных
         </h3>
