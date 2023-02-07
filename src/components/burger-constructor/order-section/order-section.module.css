@@ -1,0 +1,11 @@
+.payment {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.payment_currency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
