@@ -2,10 +2,6 @@
     width: 600px;
 }
 
-.element {
-    max-height: 80px;
-}
-
 .ingredients {
     display: flex;
     padding: 0 8px 0 0;
@@ -30,18 +26,6 @@
 
 .ingredients_inners::-webkit-scrollbar-thumb {
     background-color: #8585AD;
-}
-
-.payment {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
-.payment_currency {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .attention_text {
