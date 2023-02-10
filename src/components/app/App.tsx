@@ -39,12 +39,8 @@ const App = () => {
       <h3
         className={`text text_type_main-large mb-5 ${styleClass.loading_text}`}
       >
-        {
-          hasError && 'Произошла ошибка загрузки'
-        }
-        {
-          !hasError && 'Загрузка данных'
-        }
+        {hasError && "Произошла ошибка загрузки"}
+        {!hasError && "Загрузка данных"}
       </h3>
     ) : (
       <main>
