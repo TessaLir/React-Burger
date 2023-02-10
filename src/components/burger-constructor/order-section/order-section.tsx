@@ -1,9 +1,14 @@
+import React from "react";
+import ReactDOM from "react-dom";
+
 import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+
 import IBurderIngredient from "../../../models/byrger-ingredient";
+import OrderDetails from "../../order-details/order-details";
+import Modal from "../../modal/modal";
 
 import styleClass from "./order-section.module.css";
 
@@ -25,7 +30,20 @@ const OrderSection = ({ selectedIngridient, bun }: IProps) => {
         </p>
         <CurrencyIcon type="primary" />
       </div>
-      <Button htmlType="button" type="primary" size="large">
+      <Button
+        htmlType="button"
+        type="primary"
+        size="large"
+        onClick={() => {
+          const portal = document.getElementById("portal");
+          ReactDOM.render(
+            <Modal>
+              <OrderDetails />
+            </Modal>,
+            portal
+          );
+        }}
+      >
         Оформить заказ
       </Button>
     </section>
