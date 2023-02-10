@@ -25,7 +25,6 @@ const BurgerIngredientsItem = (props: IProps) => {
   const modalShow = () => {
     const portal = document.getElementById("portal");
     if (portal) {
-      portal.innerText = "";
       const root = createRoot(portal);
       root.render(
         <Modal root={root}>
