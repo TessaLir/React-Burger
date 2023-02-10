@@ -1,8 +1,9 @@
-import { data } from "./../helpers/SD";
+import { apiPath } from "./../helpers/SD";
 
-const getBurgerIngredient = () => {
-  const result = data;
-  return result;
+async function getBurgerIngredient() {
+  const res = await fetch(apiPath);
+  const json = await res.json();
+  return json.data;
 };
 
 export { getBurgerIngredient };

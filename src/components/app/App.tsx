@@ -10,14 +10,21 @@ import styleClass from "./App.module.css";
 import IBurderIngredient from "../../models/byrger-ingredient";
 
 const App = () => {
+  const [isLoadData, setIsLoadData] = useState(false);
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setData(getBurgerIngredient());
-    }, 750);
-  }, []);
+    if (data.length === 0 && !isLoadData) {
+      downloadData();
+    }
+  }, [data.length, isLoadData]);
+
+  const downloadData = async () => {
+    setIsLoadData(true);
+    setData(await getBurgerIngredient());
+    setIsLoadData(false);
+  };
 
   const content =
     data.length === 0 ? (
