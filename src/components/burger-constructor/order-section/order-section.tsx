@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 
 import {
   Button,
@@ -15,17 +15,16 @@ import styleClass from "./order-section.module.css";
 interface IProps {
   selectedIngridient: IBurderIngredient[];
   bun: IBurderIngredient;
+  portalRoot: Root | null;
 }
 
-const OrderSection = ({ selectedIngridient, bun }: IProps) => {
+const OrderSection = ({ selectedIngridient, bun, portalRoot }: IProps) => {
   const { payment, payment_currency } = styleClass;
 
   const modalShow = () => {
-    const portal = document.getElementById("portal");
-    if (portal) {
-      const root = createRoot(portal);
-      root.render(
-        <Modal root={root}>
+    if (portalRoot) {
+      portalRoot.render(
+        <Modal root={portalRoot}>
           <OrderDetails />
         </Modal>
       );

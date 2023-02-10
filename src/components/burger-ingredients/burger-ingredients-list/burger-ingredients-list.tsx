@@ -1,4 +1,6 @@
 import { SetStateAction } from "react";
+import { Root } from "react-dom/client";
+
 import IBurderIngredient from "../../../models/byrger-ingredient";
 import BurgerIngredientsItem from "./burger-ingredients-item/burger-ingredients-item";
 
@@ -9,10 +11,11 @@ interface IProps {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
   setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
+  portalRoot: Root | null;
 }
 
 const BurgerIngredientsList = (props: IProps) => {
-  const { data, title, selectedItems, setSelectedItems } = props;
+  const { data, title, selectedItems, setSelectedItems, portalRoot } = props;
 
   const addElementInSelected = (item: IBurderIngredient) => {
     setSelectedItems([...selectedItems, item]);
@@ -30,6 +33,7 @@ const BurgerIngredientsList = (props: IProps) => {
               selectedItems.filter((el) => el._id === item._id).length
             }
             addElementInSelected={addElementInSelected}
+            portalRoot={portalRoot}
           />
         ))}
       </section>

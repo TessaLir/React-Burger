@@ -1,14 +1,13 @@
-import { SetStateAction, useEffect } from "react";
-import Modal from "../../../modal/modal";
+import { createRoot, Root } from "react-dom/client";
 
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { createRoot } from "react-dom/client";
 import IBurderIngredient from "../../../../models/byrger-ingredient";
 import IngredientDetails from "../../../ingredient-details/ingredient-details";
+import Modal from "../../../modal/modal";
 
 import styleClass from "./burger-ingredients-item.module.css";
 
@@ -16,22 +15,21 @@ interface IProps {
   item: IBurderIngredient;
   selectedCount: number;
   addElementInSelected: (item: IBurderIngredient) => void;
+  portalRoot: Root | null;
 }
 
 const BurgerIngredientsItem = (props: IProps) => {
-  const { selectedCount, item, addElementInSelected } = props;
+  const { selectedCount, item, addElementInSelected, portalRoot } = props;
   const { _id, name, price, image } = item;
 
   const modalShow = () => {
-    const portal = document.getElementById("portal");
-    if (portal) {
-      const root = createRoot(portal);
-      root.render(
-        <Modal root={root}>
+    if (portalRoot) {
+      portalRoot.render(
+        <Modal root={portalRoot}>
           <IngredientDetails
             item={item}
             addElementInSelected={addElementInSelected}
-            root={root}
+            root={portalRoot}
           />
         </Modal>
       );

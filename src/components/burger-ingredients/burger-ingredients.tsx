@@ -1,6 +1,8 @@
 import React, { SetStateAction, useState } from "react";
+import { Root } from "react-dom/client";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import IBurderIngredient from "../../models/byrger-ingredient";
 import BurgerIngredientsList from "./burger-ingredients-list/burger-ingredients-list";
 import { tabs } from "../../helpers/SD";
@@ -11,9 +13,15 @@ interface IProps {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
   setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
+  portalRoot: Root | null;
 }
 
-const BurgerIngredients = ({ data, selectedItems, setSelectedItems }: IProps) => {
+const BurgerIngredients = ({
+  data,
+  selectedItems,
+  setSelectedItems,
+  portalRoot,
+}: IProps) => {
   const [current, setCurrent] = useState(tabs[0].key);
 
   return (
@@ -43,6 +51,7 @@ const BurgerIngredients = ({ data, selectedItems, setSelectedItems }: IProps) =>
             data={data.filter((el) => el.type === tab.key)}
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
+            portalRoot={portalRoot}
           />
         ))}
       </section>
