@@ -10,19 +10,27 @@ import styleClass from "./App.module.css";
 import IBurderIngredient from "../../models/byrger-ingredient";
 
 const App = () => {
-  const [isLoadData, setIsLoadData] = useState(false);
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
 
+  const [isLoadData, setIsLoadData] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
-    if (data.length === 0 && !isLoadData) {
+    if (data.length === 0 && !isLoadData && !hasError) {
       downloadData();
     }
-  }, [data.length, isLoadData]);
+  }, [data.length, hasError, isLoadData]);
 
   const downloadData = async () => {
     setIsLoadData(true);
-    setData(await getBurgerIngredient());
+    const data = await getBurgerIngredient();
+    console.log(data);
+    if (data.success) {
+      setData(data.data);
+    } else {
+      setHasError(true);
+    }
     setIsLoadData(false);
   };
 
@@ -31,7 +39,12 @@ const App = () => {
       <h3
         className={`text text_type_main-large mb-5 ${styleClass.loading_text}`}
       >
-        Загрузка данных
+        {
+          hasError && 'Произошла ошибка загрузки'
+        }
+        {
+          !hasError && 'Загрузка данных'
+        }
       </h3>
     ) : (
       <main>
