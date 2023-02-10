@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import {
   Button,
@@ -19,6 +19,19 @@ interface IProps {
 
 const OrderSection = ({ selectedIngridient, bun }: IProps) => {
   const { payment, payment_currency } = styleClass;
+
+  const modalShow = () => {
+    const portal = document.getElementById("portal");
+    if (portal) {
+      const root = createRoot(portal);
+      root.render(
+        <Modal root={root}>
+          <OrderDetails />
+        </Modal>
+      );
+    }
+  };
+
   return (
     <section className={`${payment} mt-10 pr-10`}>
       <div className={`${payment_currency} mr-10`}>
@@ -30,20 +43,7 @@ const OrderSection = ({ selectedIngridient, bun }: IProps) => {
         </p>
         <CurrencyIcon type="primary" />
       </div>
-      <Button
-        htmlType="button"
-        type="primary"
-        size="large"
-        onClick={() => {
-          const portal = document.getElementById("portal");
-          ReactDOM.render(
-            <Modal>
-              <OrderDetails />
-            </Modal>,
-            portal
-          );
-        }}
-      >
+      <Button htmlType="button" type="primary" size="large" onClick={modalShow}>
         Оформить заказ
       </Button>
     </section>

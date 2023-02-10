@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect } from "react";
+import { createRoot, Root, RootOptions } from "react-dom/client";
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -8,13 +8,14 @@ import styleClass from "./modal.module.css";
 
 interface IProps {
   children: any;
+  root: Root;
 }
 
-const Modal = ({ children }: IProps) => {
+const Modal = ({ children, root }: IProps) => {
   const onClose = () => {
-    const portal = document.getElementById("portal");
-    ReactDOM.render(<></>, portal);
+    root.render(<></>);
   };
+
 
   return (
     <>

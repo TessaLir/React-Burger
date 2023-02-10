@@ -1,10 +1,14 @@
+import { SetStateAction, useEffect } from "react";
+import Modal from "../../../modal/modal";
+
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { SetStateAction } from "react";
 
+import { createRoot } from "react-dom/client";
 import IBurderIngredient from "../../../../models/byrger-ingredient";
+import IngredientDetails from "../../../ingredient-details/ingredient-details";
 
 import styleClass from "./burger-ingredients-item.module.css";
 
@@ -18,12 +22,27 @@ const BurgerIngredientsItem = (props: IProps) => {
   const { selectedCount, item, addElementInSelected } = props;
   const { _id, name, price, image } = item;
 
+  const modalShow = () => {
+    const portal = document.getElementById("portal");
+    if (portal) {
+      portal.innerText = "";
+      const root = createRoot(portal);
+      root.render(
+        <Modal root={root}>
+          <IngredientDetails
+            item={item}
+            addElementInSelected={addElementInSelected}
+            root={root}
+          />
+        </Modal>
+      );
+    }
+  };
+  
   return (
     <article
       className={`${styleClass.ingredient} mt-6 mb-10 ml-4 mr-3`}
-      onClick={() => {
-        addElementInSelected(item);
-      }}
+      onClick={modalShow}
     >
       <div className={`${styleClass.ingredient_top} pb-1 pl-4 pr-4`}>
         {selectedCount === 0 ? null : (

@@ -1,0 +1,9 @@
+.info {
+    width: 112px;
+    color: #8585AD;
+    line-height: 2;
+}
+
+.info>span {
+    font-size: 24px;
+}
