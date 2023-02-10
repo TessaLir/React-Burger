@@ -15,13 +15,11 @@ import OrderSection from "./order-section/order-section";
 
 interface IProps {
   data: IBurderIngredient[];
+  selectedItems: IBurderIngredient[];
 }
 
-const BurgerConstructor = (props: IProps) => {
+const BurgerConstructor = ({ data, selectedItems }: IProps) => {
   const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
-  const [selectedIngridient, setSelectedIngridient] = useState<
-    IBurderIngredient[]
-  >([]);
 
   const {
     element,
@@ -34,9 +32,9 @@ const BurgerConstructor = (props: IProps) => {
 
   useEffect(() => {
     if (!fixedBun) {
-      setFixedBun(props.data[0]);
+      setFixedBun(data[0]);
     }
-  }, [fixedBun, props.data]);
+  }, [fixedBun, data]);
 
   // TODO возможно надо бы пробросить ошибку, или что то подобное.
   if (!fixedBun)
@@ -46,8 +44,7 @@ const BurgerConstructor = (props: IProps) => {
       </h3>
     );
 
-  const bun = props.data[0];
-  const ingredientLength = selectedIngridient.length;
+  const bun = data[0];
 
   return (
     <article className={`${container} pt-25 pl-4 pr-4`}>
@@ -55,28 +52,26 @@ const BurgerConstructor = (props: IProps) => {
         <BunView bunIngredient={bun} position="top" />
 
         <div className={ingredients_inners}>
-          {selectedIngridient
-            .slice(1, ingredientLength - 1)
-            .map((item, index) => (
-              <section
-                key={`${item._id}-${index}`}
-                className={`${drawable_element} pr-4`}
-              >
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  extraClass={element}
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image}
-                />
-              </section>
-            ))}
+          {selectedItems.map((item, index) => (
+            <section
+              key={`${item._id}-${index}`}
+              className={`${drawable_element} pr-4`}
+            >
+              <DragIcon type="primary" />
+              <ConstructorElement
+                extraClass={element}
+                text={item.name}
+                price={item.price}
+                thumbnail={item.image}
+              />
+            </section>
+          ))}
         </div>
 
         <BunView bunIngredient={bun} position="bottom" />
       </section>
 
-      <OrderSection selectedIngridient={selectedIngridient} bun={bun} />
+      <OrderSection selectedIngridient={selectedItems} bun={bun} />
     </article>
   );
 };

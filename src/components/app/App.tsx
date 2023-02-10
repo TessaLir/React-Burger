@@ -11,6 +11,9 @@ import IBurderIngredient from "../../models/byrger-ingredient";
 
 const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
+  const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
+
+  
 
   useEffect(() => {
     setTimeout(() => {
@@ -28,8 +31,8 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <BurgerIngredients data={data} />
-          <BurgerConstructor data={data} />
+          <BurgerIngredients data={data} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+          <BurgerConstructor data={data} selectedItems={selectedItems} />
         </div>
       </main>
     );
