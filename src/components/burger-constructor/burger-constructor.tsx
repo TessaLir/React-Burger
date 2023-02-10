@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 
 import {
-  Button,
   ConstructorElement,
-  CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -16,9 +14,14 @@ import OrderSection from "./order-section/order-section";
 interface IProps {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
+  setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
 }
 
-const BurgerConstructor = ({ data, selectedItems }: IProps) => {
+const BurgerConstructor = ({
+  data,
+  selectedItems,
+  setSelectedItems,
+}: IProps) => {
   const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
 
   const {
@@ -35,6 +38,13 @@ const BurgerConstructor = ({ data, selectedItems }: IProps) => {
       setFixedBun(data[0]);
     }
   }, [fixedBun, data]);
+
+  const removeSelectedItem = (index: number) => {
+    setSelectedItems([
+      ...selectedItems.slice(0, index),
+      ...selectedItems.slice(index + 1),
+    ]);
+  };
 
   // TODO возможно надо бы пробросить ошибку, или что то подобное.
   if (!fixedBun)
@@ -63,6 +73,9 @@ const BurgerConstructor = ({ data, selectedItems }: IProps) => {
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
+                handleClose={() => {
+                  removeSelectedItem(index);
+                }}
               />
             </section>
           ))}

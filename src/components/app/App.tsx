@@ -13,8 +13,6 @@ const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
 
-  
-
   useEffect(() => {
     setTimeout(() => {
       setData(getBurgerIngredient());
@@ -31,8 +29,16 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <BurgerIngredients data={data} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
-          <BurgerConstructor data={data} selectedItems={selectedItems} />
+          <BurgerIngredients
+            data={data}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
+          />
+          <BurgerConstructor
+            data={data}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
+          />
         </div>
       </main>
     );
