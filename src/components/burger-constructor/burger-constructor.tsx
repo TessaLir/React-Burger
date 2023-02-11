@@ -1,5 +1,4 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import { Root } from "react-dom/client";
 
 import {
   ConstructorElement,
@@ -16,14 +15,12 @@ interface IProps {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
   setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
-  portalRoot: Root | null;
 }
 
 const BurgerConstructor = ({
   data,
   selectedItems,
   setSelectedItems,
-  portalRoot
 }: IProps) => {
   const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
 
@@ -87,7 +84,7 @@ const BurgerConstructor = ({
         <BunView bunIngredient={bun} position="bottom" />
       </section>
 
-      <OrderSection selectedIngridient={selectedItems} bun={bun} portalRoot={portalRoot} />
+      <OrderSection selectedIngridient={selectedItems} bun={bun} />
     </article>
   );
 };

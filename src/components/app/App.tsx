@@ -8,13 +8,10 @@ import { getBurgerIngredient } from "../../api/burger-api";
 
 import styleClass from "./App.module.css";
 import IBurderIngredient from "../../models/byrger-ingredient";
-import { createRoot, Root } from "react-dom/client";
 
 const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
-
-  const [portalRoot, setPortalRoot] = useState<Root | null>(null);
 
   const [isLoadData, setIsLoadData] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -24,18 +21,6 @@ const App = () => {
       downloadData();
     }
   }, [data.length, hasError, isLoadData]);
-
-  useEffect(() => {
-    const portal = document.getElementById("portal");
-    if (!portalRoot && portal) {
-      setPortalRoot(createRoot(portal));
-    }
-    return () => {
-      if (portalRoot) {
-        portalRoot.unmount();
-      }
-    };
-  }, [portalRoot]);
 
   const downloadData = async () => {
     setIsLoadData(true);
@@ -61,13 +46,11 @@ const App = () => {
             data={data}
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
-            portalRoot={portalRoot}
           />
           <BurgerConstructor
             data={data}
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
-            portalRoot={portalRoot}
           />
         </div>
       </main>

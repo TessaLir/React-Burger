@@ -1,4 +1,4 @@
-import { createRoot, Root } from "react-dom/client";
+import { SetStateAction } from "react";
 
 import {
   Counter,
@@ -6,40 +6,23 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import IBurderIngredient from "../../../../models/byrger-ingredient";
-import IngredientDetails from "../../../ingredient-details/ingredient-details";
-import Modal from "../../../modal/modal";
 
 import styleClass from "./burger-ingredients-item.module.css";
 
 interface IProps {
   item: IBurderIngredient;
   selectedCount: number;
-  addElementInSelected: (item: IBurderIngredient) => void;
-  portalRoot: Root | null;
+  setSelectItem: (value: SetStateAction<IBurderIngredient | null>) => void;
 }
 
 const BurgerIngredientsItem = (props: IProps) => {
-  const { selectedCount, item, addElementInSelected, portalRoot } = props;
+  const { selectedCount, item, setSelectItem } = props;
   const { _id, name, price, image } = item;
 
-  const modalShow = () => {
-    if (portalRoot) {
-      portalRoot.render(
-        <Modal root={portalRoot}>
-          <IngredientDetails
-            item={item}
-            addElementInSelected={addElementInSelected}
-            root={portalRoot}
-          />
-        </Modal>
-      );
-    }
-  };
-  
   return (
     <article
       className={`${styleClass.ingredient} mt-6 mb-10 ml-4 mr-3`}
-      onClick={modalShow}
+      onClick={() => setSelectItem(item)}
     >
       <div className={`${styleClass.ingredient_top} pb-1 pl-4 pr-4`}>
         {selectedCount === 0 ? null : (

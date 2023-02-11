@@ -1,7 +1,8 @@
-import { SetStateAction } from "react";
-import { Root } from "react-dom/client";
+import { SetStateAction, useState } from "react";
 
 import IBurderIngredient from "../../../models/byrger-ingredient";
+import IngredientDetails from "../../ingredient-details/ingredient-details";
+import Modal from "../../modal/modal";
 import BurgerIngredientsItem from "./burger-ingredients-item/burger-ingredients-item";
 
 import styleClass from "./burger-ingredients-list.module.css";
@@ -11,11 +12,12 @@ interface IProps {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
   setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
-  portalRoot: Root | null;
 }
 
 const BurgerIngredientsList = (props: IProps) => {
-  const { data, title, selectedItems, setSelectedItems, portalRoot } = props;
+  const { data, title, selectedItems, setSelectedItems } = props;
+
+  const [selectItem, setSelectItem] = useState<IBurderIngredient | null>(null);
 
   const addElementInSelected = (item: IBurderIngredient) => {
     setSelectedItems([...selectedItems, item]);
@@ -32,10 +34,19 @@ const BurgerIngredientsList = (props: IProps) => {
             selectedCount={
               selectedItems.filter((el) => el._id === item._id).length
             }
-            addElementInSelected={addElementInSelected}
-            portalRoot={portalRoot}
+            setSelectItem={setSelectItem}
           />
         ))}
+
+        {selectItem && (
+          <Modal onClose={() => setSelectItem(null)}>
+            <IngredientDetails
+              item={selectItem}
+              addElementInSelected={addElementInSelected}
+              onCloseModal={() => setSelectItem(null)}
+            />
+          </Modal>
+        )}
       </section>
     </article>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import { createRoot, Root } from "react-dom/client";
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -11,17 +10,17 @@ import styleClass from "./ingredient-details.module.css";
 interface IProps {
   item: IBurderIngredient;
   addElementInSelected: (item: IBurderIngredient) => void;
-  root: Root;
+  onCloseModal: () => void;
 }
 
-const IngredientDetails = ({ item, addElementInSelected, root }: IProps) => {
-  const onClose = () => {
-    root.render(<></>);
-  };
-
+const IngredientDetails = ({
+  item,
+  addElementInSelected,
+  onCloseModal,
+}: IProps) => {
   const addIngredientInBoorger = () => {
     addElementInSelected(item);
-    onClose();
+    onCloseModal();
   };
 
   return (

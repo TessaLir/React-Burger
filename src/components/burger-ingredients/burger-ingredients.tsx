@@ -1,5 +1,4 @@
 import React, { SetStateAction, useState } from "react";
-import { Root } from "react-dom/client";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -13,14 +12,12 @@ interface IProps {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
   setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
-  portalRoot: Root | null;
 }
 
 const BurgerIngredients = ({
   data,
   selectedItems,
   setSelectedItems,
-  portalRoot,
 }: IProps) => {
   const [current, setCurrent] = useState(tabs[0].key);
 
@@ -51,7 +48,6 @@ const BurgerIngredients = ({
             data={data.filter((el) => el.type === tab.key)}
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
-            portalRoot={portalRoot}
           />
         ))}
       </section>

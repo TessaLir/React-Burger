@@ -1,5 +1,4 @@
-import React from "react";
-import { createRoot, Root } from "react-dom/client";
+import React, { useState } from "react";
 
 import {
   Button,
@@ -15,21 +14,12 @@ import styleClass from "./order-section.module.css";
 interface IProps {
   selectedIngridient: IBurderIngredient[];
   bun: IBurderIngredient;
-  portalRoot: Root | null;
 }
 
-const OrderSection = ({ selectedIngridient, bun, portalRoot }: IProps) => {
+const OrderSection = ({ selectedIngridient, bun }: IProps) => {
   const { payment, payment_currency } = styleClass;
 
-  const modalShow = () => {
-    if (portalRoot) {
-      portalRoot.render(
-        <Modal root={portalRoot}>
-          <OrderDetails />
-        </Modal>
-      );
-    }
-  };
+  const [isOpenModal, setOpenModal] = useState(false);
 
   return (
     <section className={`${payment} mt-10 pr-10`}>
@@ -42,9 +32,14 @@ const OrderSection = ({ selectedIngridient, bun, portalRoot }: IProps) => {
         </p>
         <CurrencyIcon type="primary" />
       </div>
-      <Button htmlType="button" type="primary" size="large" onClick={modalShow}>
+      <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
         Оформить заказ
       </Button>
+      {isOpenModal && (
+        <Modal onClose={() => setOpenModal(false)}>
+          <OrderDetails />
+        </Modal>
+      )}
     </section>
   );
 };
