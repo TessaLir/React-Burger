@@ -6,24 +6,31 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
 import styleClass from "./modal.module.css";
+import { keyboardKey } from "@testing-library/user-event";
 
 interface IProps {
   children: any;
   onClose: () => void;
-  closeByEscape?: ((e: KeyboardEvent) => void) | undefined;
 }
 
 const portal = document.getElementById("portal");
 
-const Modal = ({ children, onClose, closeByEscape }: IProps) => {
+const Modal = ({ children, onClose }: IProps) => {
+
   useEffect(() => {
+    const closeByEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    }
+
     if (closeByEscape) {
       document.addEventListener("keydown", closeByEscape);
       return () => {
         document.removeEventListener("keydown", closeByEscape);
       };
     }
-  }, [closeByEscape]);
+  }, [onClose]);
 
   if (!portal) return null;
 
