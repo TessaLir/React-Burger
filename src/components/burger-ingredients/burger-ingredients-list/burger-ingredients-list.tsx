@@ -23,6 +23,18 @@ const BurgerIngredientsList = (props: IProps) => {
     setSelectedItems([...selectedItems, item]);
   };
 
+  const modalKeyDownListener = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setSelectItem(null);
+    }
+    if (e.key === "Enter") {
+      if (selectItem) {
+        addElementInSelected(selectItem);
+        setSelectItem(null);
+      }
+    }
+  };
+
   return (
     <article>
       <h3 className="text text_type_main-large mb-5">{title}</h3>
@@ -39,7 +51,10 @@ const BurgerIngredientsList = (props: IProps) => {
         ))}
 
         {selectItem && (
-          <Modal onClose={() => setSelectItem(null)}>
+          <Modal
+            onClose={() => setSelectItem(null)}
+            closeByEscape={modalKeyDownListener}
+          >
             <IngredientDetails
               item={selectItem}
               addElementInSelected={addElementInSelected}

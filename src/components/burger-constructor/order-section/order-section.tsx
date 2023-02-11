@@ -21,6 +21,12 @@ const OrderSection = ({ selectedIngridient, bun }: IProps) => {
 
   const [isOpenModal, setOpenModal] = useState(false);
 
+  const modalKeyDownListener = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setOpenModal(false);
+    }
+  };
+
   return (
     <section className={`${payment} mt-10 pr-10`}>
       <div className={`${payment_currency} mr-10`}>
@@ -32,11 +38,19 @@ const OrderSection = ({ selectedIngridient, bun }: IProps) => {
         </p>
         <CurrencyIcon type="primary" />
       </div>
-      <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
+      <Button
+        htmlType="button"
+        type="primary"
+        size="large"
+        onClick={() => setOpenModal(true)}
+      >
         Оформить заказ
       </Button>
       {isOpenModal && (
-        <Modal onClose={() => setOpenModal(false)}>
+        <Modal
+          onClose={() => setOpenModal(false)}
+          closeByEscape={modalKeyDownListener}
+        >
           <OrderDetails />
         </Modal>
       )}
