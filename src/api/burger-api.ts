@@ -7,9 +7,7 @@ async function getBurgerIngredient() {
         return res.json();
       }
       throw new Error("ошибка получения данных");
-    })
-    .then((body) => body)
-    .catch((e) => e);
+    });
 }
 
 export { getBurgerIngredient };

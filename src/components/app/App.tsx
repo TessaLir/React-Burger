@@ -39,12 +39,10 @@ const App = () => {
 
   const downloadData = async () => {
     setIsLoadData(true);
-    const data = await getBurgerIngredient();
-    if (data.success) {
-      setData(data.data);
-    } else {
-      setHasError(true);
-    }
+    await getBurgerIngredient()
+      .then((data) => setData(data.data))
+      .catch((error) => setHasError(true));
+
     setIsLoadData(false);
   };
 
