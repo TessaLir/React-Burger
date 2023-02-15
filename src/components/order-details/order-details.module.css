@@ -1,0 +1,10 @@
+.order {
+    display: flex;
+    width: 520px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image {
+    height: 120px;
+}

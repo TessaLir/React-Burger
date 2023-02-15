@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 import menuElementStyle from "./menu-element.module.css";
 
@@ -8,22 +8,12 @@ interface IProps {
   isActive?: boolean;
 }
 
-class MenuElement extends Component<IProps> {
-  state = {
-    isActive: false,
-  };
-
-  componentDidMount(): void {
-    if (this.props.isActive) {
-      this.setState({ ...this.state, isActive: true });
-    }
-  }
-
-  render() {
-    const { children, text } = this.props;
-    const textClass = this.state.isActive
+const MenuElement = (props: IProps) => {
+    const { children, text, isActive } = props;
+    const textClass = isActive
       ? `${menuElementStyle.active}`
       : `${menuElementStyle.inactive}`;
+      
     return (
       <li className={`${menuElementStyle.item} p-5`}>
         {children}
@@ -32,7 +22,6 @@ class MenuElement extends Component<IProps> {
         </p>
       </li>
     );
-  }
 }
 
 export default MenuElement;

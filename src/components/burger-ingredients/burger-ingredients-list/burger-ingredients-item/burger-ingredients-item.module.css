@@ -3,6 +3,10 @@
     width: 268px;
 }
 
+.ingredient:hover {
+    cursor: pointer;
+}
+
 .ingredient_top {
     box-sizing: border-box;
     width: 100%;

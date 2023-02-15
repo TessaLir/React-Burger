@@ -1,0 +1,28 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    width: 620px;
+    height: 64px;
+    align-items: center;
+    text-align: start;
+}
+
+.image {
+    height: 240px;
+    width: 480px;
+}
+
+.name {}
+
+.detail {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 28px;
+}

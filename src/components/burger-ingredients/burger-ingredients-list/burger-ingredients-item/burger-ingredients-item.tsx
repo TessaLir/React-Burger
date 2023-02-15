@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 import {
   Counter,
   CurrencyIcon,
@@ -9,22 +11,22 @@ import styleClass from "./burger-ingredients-item.module.css";
 
 interface IProps {
   item: IBurderIngredient;
+  selectedCount: number;
+  setSelectItem: (value: SetStateAction<IBurderIngredient | null>) => void;
 }
 
 const BurgerIngredientsItem = (props: IProps) => {
-  const hasCounter: string[] = [
-    "60666c42cc7b410027a1a9b1",
-    "60666c42cc7b410027a1a9ba",
-    "60666c42cc7b410027a1a9b9",
-  ];
-
-  const { _id, name, price, image } = props.item;
+  const { selectedCount, item, setSelectItem } = props;
+  const { _id, name, price, image } = item;
 
   return (
-    <article className={`${styleClass.ingredient} mt-6 mb-10 ml-4 mr-3`}>
+    <article
+      className={`${styleClass.ingredient} mt-6 mb-10 ml-4 mr-3`}
+      onClick={() => setSelectItem(item)}
+    >
       <div className={`${styleClass.ingredient_top} pb-1 pl-4 pr-4`}>
-        {!hasCounter.includes(_id) ? null : (
-          <Counter count={1} size="default" extraClass="m1" />
+        {selectedCount === 0 ? null : (
+          <Counter count={selectedCount} size="default" extraClass="m1" />
         )}
         <img className={styleClass.ingredient_image} src={image} alt={_id} />
         <div className={styleClass.ingredient_price}>
