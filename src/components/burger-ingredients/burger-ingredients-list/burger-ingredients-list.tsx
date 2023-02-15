@@ -1,6 +1,7 @@
-import { SetStateAction, useState } from "react";
+import { useContext, useState } from "react";
 
 import IBurderIngredient from "../../../models/byrger-ingredient";
+import { SelectedAllItemsContext } from "../../../services/app-context";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
 import Modal from "../../modal/modal";
 import BurgerIngredientsItem from "./burger-ingredients-item/burger-ingredients-item";
@@ -10,17 +11,19 @@ import styleClass from "./burger-ingredients-list.module.css";
 interface IProps {
   title: string;
   data: IBurderIngredient[];
-  selectedItems: IBurderIngredient[];
-  setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
 }
 
 const BurgerIngredientsList = (props: IProps) => {
-  const { data, title, selectedItems, setSelectedItems } = props;
-
+  const { data, title } = props;
+  const { selectedItems, setSelectedItems } = useContext(SelectedAllItemsContext);
   const [selectItem, setSelectItem] = useState<IBurderIngredient | null>(null);
 
   const addElementInSelected = (item: IBurderIngredient) => {
     setSelectedItems([...selectedItems, item]);
+  };
+
+  const getItemCountWithId = (id: string) => {
+    return selectedItems.filter((el) => el._id === id).length;
   };
 
   return (
@@ -31,9 +34,7 @@ const BurgerIngredientsList = (props: IProps) => {
           <BurgerIngredientsItem
             key={item._id}
             item={item}
-            selectedCount={
-              selectedItems.filter((el) => el._id === item._id).length
-            }
+            selectedCount={getItemCountWithId(item._id)}
             setSelectItem={setSelectItem}
           />
         ))}

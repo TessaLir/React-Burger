@@ -8,6 +8,7 @@ import { getBurgerIngredient } from "../../api/burger-api";
 
 import styleClass from "./App.module.css";
 import IBurderIngredient from "../../models/byrger-ingredient";
+import { DataContext, SelectedAllItemsContext } from "../../services/app-context";
 
 const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
@@ -42,11 +43,7 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <BurgerIngredients
-            data={data}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-          />
+          <BurgerIngredients />
           <BurgerConstructor
             data={data}
             selectedItems={selectedItems}
@@ -58,8 +55,12 @@ const App = () => {
 
   return (
     <div className={styleClass.app}>
-      <AppHeader />
-      {content}
+      <DataContext.Provider value={data}>
+        <SelectedAllItemsContext.Provider value={{selectedItems, setSelectedItems}}>
+          <AppHeader />
+          {content}
+        </SelectedAllItemsContext.Provider>
+      </DataContext.Provider>
     </div>
   );
 };
