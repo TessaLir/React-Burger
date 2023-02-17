@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import IBurderIngredient from "../../models/byrger-ingredient";
 import InfoItem from "./info-item/info-item";
 import {

@@ -2,11 +2,10 @@ import React, { useCallback, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import ModalOverlay from "../modal-overlay/modal-overlay";
+import { SelectItemContext, ShowModal } from "../../services/app-context";
 
 import styleClass from "./modal.module.css";
-import { SelectItemContext, ShowModal } from "../../services/app-context";
 
 interface IProps {
   children: any;

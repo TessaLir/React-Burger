@@ -12,7 +12,9 @@ const OrderDetails = () => {
 
   return (
     <div className={`${styleClass.order} pt-20`}>
-      <h3 className="text text_type_digits-large">{orderDetail.order.number}</h3>
+      <h3 className="text text_type_digits-large">
+        {orderDetail.order.number}
+      </h3>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <img className={`${styleClass.image} mt-15`} src={svgDone} alt="done" />
       <p className="text text_type_main-small mt-15">
