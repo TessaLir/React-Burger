@@ -1,24 +1,13 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import IBurderIngredient from "../../models/byrger-ingredient";
 import BurgerIngredientsList from "./burger-ingredients-list/burger-ingredients-list";
 import { tabs } from "../../helpers/SD";
 
 import styleClass from "./burger-ingredients.module.css";
 
-interface IProps {
-  data: IBurderIngredient[];
-  selectedItems: IBurderIngredient[];
-  setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
-}
-
-const BurgerIngredients = ({
-  data,
-  selectedItems,
-  setSelectedItems,
-}: IProps) => {
+const BurgerIngredients = () => {
   const [current, setCurrent] = useState(tabs[0].key);
 
   return (
@@ -42,13 +31,7 @@ const BurgerIngredients = ({
 
       <section className={styleClass.list}>
         {tabs.map((tab) => (
-          <BurgerIngredientsList
-            key={tab.key}
-            title={tab.text}
-            data={data.filter((el) => el.type === tab.key)}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-          />
+          <BurgerIngredientsList key={tab.key} tab={tab} />
         ))}
       </section>
     </article>

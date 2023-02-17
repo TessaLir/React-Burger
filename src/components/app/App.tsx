@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import AppHeader from "../app-header/app-header";
+import IBurderIngredient from "../../models/byrger-ingredient";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-
+import IResponseOrderDetail from "../../models/response-order-detail";
 import { getBurgerIngredient } from "../../api/burger-api";
+import {
+  DataContext,
+  SelectBunContext,
+  SelectedAllItemsContext,
+  OrderDetailsContext,
+} from "../../services/app-context";
 
 import styleClass from "./App.module.css";
-import IBurderIngredient from "../../models/byrger-ingredient";
 
 const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
+  const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
+  const [orderDetail, setOrderDetail] = useState<IResponseOrderDetail | null>(
+    null
+  );
 
   const [isLoadData, setIsLoadData] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -22,6 +32,12 @@ const App = () => {
     }
   }, [data.length, hasError, isLoadData]);
 
+  useEffect(() => {
+    if (!fixedBun) {
+      setFixedBun(data.filter((el) => el.type === "bun")[0]);
+    }
+  }, [data, fixedBun]);
+
   const downloadData = async () => {
     setIsLoadData(true);
     await getBurgerIngredient()
@@ -30,6 +46,18 @@ const App = () => {
 
     setIsLoadData(false);
   };
+
+  const contextAllItems = useMemo(() => {
+    return { selectedItems, setSelectedItems };
+  }, [selectedItems, setSelectedItems]);
+
+  const contextSelectedBun = useMemo(() => {
+    return { fixedBun, setFixedBun };
+  }, [fixedBun, setFixedBun]);
+
+  const contextSelectedDetail = useMemo(() => {
+    return { orderDetail, setOrderDetail };
+  }, [orderDetail, setOrderDetail]);
 
   const content =
     data.length === 0 ? (
@@ -42,16 +70,16 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <BurgerIngredients
-            data={data}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-          />
-          <BurgerConstructor
-            data={data}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-          />
+          <DataContext.Provider value={data}>
+            <SelectedAllItemsContext.Provider value={contextAllItems}>
+              <SelectBunContext.Provider value={contextSelectedBun}>
+                <OrderDetailsContext.Provider value={contextSelectedDetail}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </OrderDetailsContext.Provider>
+              </SelectBunContext.Provider>
+            </SelectedAllItemsContext.Provider>
+          </DataContext.Provider>
         </div>
       </main>
     );

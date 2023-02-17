@@ -5,7 +5,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IMenuItem from "../models/menu-item";
 
-const apiPath = "https://norma.nomoreparties.space/api/ingredients";
+const apiGetDataPath = "https://norma.nomoreparties.space/api/ingredients";
+const apiPostSendOrderPath = "https://norma.nomoreparties.space/api/orders";
 
 const menuItems: IMenuItem[] = [
   {
@@ -39,4 +40,4 @@ const tabs: { key: string; text: string }[] = [
   },
 ];
 
-export { apiPath, menuItems, tabs };
+export { apiGetDataPath, apiPostSendOrderPath, menuItems, tabs };

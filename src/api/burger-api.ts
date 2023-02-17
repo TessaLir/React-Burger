@@ -1,13 +1,26 @@
-import { apiPath } from "./../helpers/SD";
+import IRequestOrder from "../models/request-order";
+import { apiGetDataPath, apiPostSendOrderPath } from "./../helpers/SD";
 
 async function getBurgerIngredient() {
-  return await fetch(apiPath)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("ошибка получения данных");
-    });
+  return await fetch(apiGetDataPath).then(checkResponse);
 }
 
-export { getBurgerIngredient };
+async function fetchSendOrder(body: IRequestOrder) {
+  return await fetch(apiPostSendOrderPath, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(body),
+  }).then(checkResponse);
+}
+
+async function checkResponse(res: Response) {
+  return res.ok
+    ? res.json()
+    : res.json().catch((err) => {
+        return Promise.reject(err);
+      });
+}
+
+export { getBurgerIngredient, fetchSendOrder };

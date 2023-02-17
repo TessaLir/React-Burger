@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { OrderDetailsContext } from "../../services/app-context";
 
 import svgDone from "./../../images/done.svg";
 
 import styleClass from "./order-details.module.css";
 
 const OrderDetails = () => {
+  const { orderDetail } = useContext(OrderDetailsContext);
+
+  if (!orderDetail) return null;
+
   return (
     <div className={`${styleClass.order} pt-20`}>
-      <h3 className="text text_type_digits-large">034536</h3>
+      <h3 className="text text_type_digits-large">
+        {orderDetail.order.number}
+      </h3>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <img className={`${styleClass.image} mt-15`} src={svgDone} alt="done" />
       <p className="text text_type_main-small mt-15">

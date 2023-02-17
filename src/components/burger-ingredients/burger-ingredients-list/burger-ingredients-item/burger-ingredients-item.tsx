@@ -1,23 +1,34 @@
-import { SetStateAction } from "react";
+import { useContext } from "react";
 
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import {
+  SelectBunContext,
+  SelectedAllItemsContext,
+  SelectItemContext,
+} from "../../../../services/app-context";
 import IBurderIngredient from "../../../../models/byrger-ingredient";
 
 import styleClass from "./burger-ingredients-item.module.css";
 
 interface IProps {
   item: IBurderIngredient;
-  selectedCount: number;
-  setSelectItem: (value: SetStateAction<IBurderIngredient | null>) => void;
 }
 
-const BurgerIngredientsItem = (props: IProps) => {
-  const { selectedCount, item, setSelectItem } = props;
+const BurgerIngredientsItem = ({ item }: IProps) => {
   const { _id, name, price, image } = item;
+
+  const { selectedItems } = useContext(SelectedAllItemsContext);
+  const { setSelectItem } = useContext(SelectItemContext);
+  const { fixedBun } = useContext(SelectBunContext);
+
+  const selectedCount =
+    fixedBun && fixedBun._id === item._id
+      ? 2
+      : selectedItems.filter((el) => el._id === _id).length;
 
   return (
     <article
