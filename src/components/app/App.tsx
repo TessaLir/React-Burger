@@ -58,33 +58,33 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <BurgerIngredients />
-          <BurgerConstructor />
+          <DataContext.Provider value={data}>
+            <SelectedAllItemsContext.Provider
+              value={{ selectedItems, setSelectedItems }}
+            >
+              <SelectBunContext.Provider
+                value={{ fixedBun: fixedBun, setFixedBun: setFixedBun }}
+              >
+                <OrderDetailsContext.Provider
+                  value={{
+                    orderDetail: orderDetail,
+                    setOrderDetail: setOrderDetail,
+                  }}
+                >
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </OrderDetailsContext.Provider>
+              </SelectBunContext.Provider>
+            </SelectedAllItemsContext.Provider>
+          </DataContext.Provider>
         </div>
       </main>
     );
 
   return (
     <div className={styleClass.app}>
-      <DataContext.Provider value={data}>
-        <SelectedAllItemsContext.Provider
-          value={{ selectedItems, setSelectedItems }}
-        >
-          <SelectBunContext.Provider
-            value={{ fixedBun: fixedBun, setFixedBun: setFixedBun }}
-          >
-            <OrderDetailsContext.Provider
-              value={{
-                orderDetail: orderDetail,
-                setOrderDetail: setOrderDetail,
-              }}
-            >
-              <AppHeader />
-              {content}
-            </OrderDetailsContext.Provider>
-          </SelectBunContext.Provider>
-        </SelectedAllItemsContext.Provider>
-      </DataContext.Provider>
+      <AppHeader />
+      {content}
     </div>
   );
 };
