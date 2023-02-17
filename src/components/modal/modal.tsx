@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,23 +6,24 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
 import styleClass from "./modal.module.css";
-import { keyboardKey } from "@testing-library/user-event";
+import { SelectItemContext } from "../../services/app-context";
 
 interface IProps {
   children: any;
-  onClose: () => void;
 }
 
 const portal = document.getElementById("portal");
 
-const Modal = ({ children, onClose }: IProps) => {
+const Modal = ({ children }: IProps) => {
+  const { setSelectItem } = useContext(SelectItemContext);
+  const onClose = useCallback(() => setSelectItem(null), [setSelectItem]);
 
   useEffect(() => {
     const closeByEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
-    }
+    };
 
     if (closeByEscape) {
       document.addEventListener("keydown", closeByEscape);

@@ -1,28 +1,26 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import IBurderIngredient from "../../models/byrger-ingredient";
 import BunView from "./bun-view/bun-view";
+import OrderSection from "./order-section/order-section";
+import {
+  DataContext,
+  SelectBunContext,
+  SelectedAllItemsContext,
+} from "../../services/app-context";
 
 import styleClass from "./burger-constructor.module.css";
-import OrderSection from "./order-section/order-section";
 
-interface IProps {
-  data: IBurderIngredient[];
-  selectedItems: IBurderIngredient[];
-  setSelectedItems: (value: SetStateAction<IBurderIngredient[]>) => void;
-}
-
-const BurgerConstructor = ({
-  data,
-  selectedItems,
-  setSelectedItems,
-}: IProps) => {
-  const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
+const BurgerConstructor = () => {
+  const data = useContext(DataContext);
+  const { selectedItems, setSelectedItems } = useContext(
+    SelectedAllItemsContext
+  );
+  const { fixedBun } = useContext(SelectBunContext);
 
   const {
     element,
@@ -32,12 +30,6 @@ const BurgerConstructor = ({
     drawable_element,
     ingredients_inners,
   } = styleClass;
-
-  useEffect(() => {
-    if (!fixedBun) {
-      setFixedBun(data[0]);
-    }
-  }, [fixedBun, data]);
 
   const removeSelectedItem = (index: number) => {
     setSelectedItems([
@@ -59,7 +51,7 @@ const BurgerConstructor = ({
   return (
     <article className={`${container} pt-25 pl-4 pr-4`}>
       <section className={ingredients}>
-        <BunView bunIngredient={bun} position="top" />
+        <BunView position="top" />
 
         <div className={ingredients_inners}>
           {selectedItems.map((item, index) => (
@@ -81,10 +73,10 @@ const BurgerConstructor = ({
           ))}
         </div>
 
-        <BunView bunIngredient={bun} position="bottom" />
+        <BunView position="bottom" />
       </section>
 
-      <OrderSection selectedIngridient={selectedItems} bun={bun} />
+      <OrderSection />
     </article>
   );
 };

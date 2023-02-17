@@ -8,11 +8,16 @@ import { getBurgerIngredient } from "../../api/burger-api";
 
 import styleClass from "./App.module.css";
 import IBurderIngredient from "../../models/byrger-ingredient";
-import { DataContext, SelectedAllItemsContext } from "../../services/app-context";
+import {
+  DataContext,
+  SelectBunContext,
+  SelectedAllItemsContext,
+} from "../../services/app-context";
 
 const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
+  const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
 
   const [isLoadData, setIsLoadData] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -22,6 +27,12 @@ const App = () => {
       downloadData();
     }
   }, [data.length, hasError, isLoadData]);
+
+  useEffect(() => {
+    if (!fixedBun) {
+      setFixedBun(data.filter((el) => el.type === "bun")[0]);
+    }
+  }, [data, fixedBun]);
 
   const downloadData = async () => {
     setIsLoadData(true);
@@ -44,11 +55,7 @@ const App = () => {
       <main>
         <div className={styleClass.container}>
           <BurgerIngredients />
-          <BurgerConstructor
-            data={data}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-          />
+          <BurgerConstructor />
         </div>
       </main>
     );
@@ -56,9 +63,15 @@ const App = () => {
   return (
     <div className={styleClass.app}>
       <DataContext.Provider value={data}>
-        <SelectedAllItemsContext.Provider value={{selectedItems, setSelectedItems}}>
-          <AppHeader />
-          {content}
+        <SelectedAllItemsContext.Provider
+          value={{ selectedItems, setSelectedItems }}
+        >
+          <SelectBunContext.Provider
+            value={{ fixedBun: fixedBun, setFixedBun: setFixedBun }}
+          >
+            <AppHeader />
+            {content}
+          </SelectBunContext.Provider>
         </SelectedAllItemsContext.Provider>
       </DataContext.Provider>
     </div>

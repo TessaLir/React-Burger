@@ -1,4 +1,4 @@
-import React, { SetStateAction, useContext, useState } from "react";
+import React, { useState } from "react";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -6,12 +6,9 @@ import BurgerIngredientsList from "./burger-ingredients-list/burger-ingredients-
 import { tabs } from "../../helpers/SD";
 
 import styleClass from "./burger-ingredients.module.css";
-import { DataContext } from "../../services/app-context";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState(tabs[0].key);
-
-  const data = useContext(DataContext);
 
   return (
     <article className={`${styleClass.content} pt-10`}>
@@ -34,11 +31,7 @@ const BurgerIngredients = () => {
 
       <section className={styleClass.list}>
         {tabs.map((tab) => (
-          <BurgerIngredientsList
-            key={tab.key}
-            title={tab.text}
-            data={data.filter((el) => el.type === tab.key)}
-          />
+          <BurgerIngredientsList key={tab.key} tab={tab} />
         ))}
       </section>
     </article>

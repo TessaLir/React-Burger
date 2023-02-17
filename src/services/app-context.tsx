@@ -7,7 +7,12 @@ export const SelectedAllItemsContext = createContext<{
   setSelectedItems: React.Dispatch<React.SetStateAction<IBurderIngredient[]>>;
 }>({ selectedItems: [], setSelectedItems: () => {} });
 
+export const SelectItemContext = createContext<{
+  selectItem: IBurderIngredient | null;
+  setSelectItem: React.Dispatch<React.SetStateAction<IBurderIngredient | null>>;
+}>({ selectItem: null, setSelectItem: () => {} });
 
-//TODO Тут надо на самом деле преобразовывать стор SelectedAllItemsContex возможно делать его через useReducer, 
-//     в selectedItems так же вести подсчет, сколько раз выбирался элемент что то типа:
-//     [ { _id: "321123", count: 5 }, { _id: "123321", count: 2 } ] : { _id: string, count: number }[]
+export const SelectBunContext = createContext<{
+  fixedBun: IBurderIngredient | null;
+  setFixedBun: React.Dispatch<React.SetStateAction<IBurderIngredient | null>>;
+}>({ fixedBun: null, setFixedBun: () => {} });

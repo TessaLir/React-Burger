@@ -1,17 +1,20 @@
-import React from "react";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useContext } from "react";
 
-import IBurderIngredient from "../../../models/byrger-ingredient";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { SelectBunContext } from "../../../services/app-context";
 
 import styleClass from "./bun-view.module.css";
 
 interface IProps {
   position: "top" | "bottom";
-  bunIngredient: IBurderIngredient;
 }
 
-const BunVuew = ({ position, bunIngredient }: IProps) => {
-  const { name, price, image } = bunIngredient;
+const BunVuew = ({ position }: IProps) => {
+  const { fixedBun } = useContext(SelectBunContext);
+
+  if (!fixedBun) return null;
+
+  const { name, price, image } = fixedBun;
   return (
     <section className="pl-8 pr-8">
       <ConstructorElement

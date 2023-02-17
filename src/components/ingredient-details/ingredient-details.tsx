@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -6,21 +6,26 @@ import IBurderIngredient from "../../models/byrger-ingredient";
 import InfoItem from "./info-item/info-item";
 
 import styleClass from "./ingredient-details.module.css";
+import {
+  SelectedAllItemsContext,
+  SelectItemContext,
+} from "../../services/app-context";
 
-interface IProps {
-  item: IBurderIngredient;
-  addElementInSelected: (item: IBurderIngredient) => void;
-  onCloseModal: () => void;
-}
+const IngredientDetails = () => {
+  const { selectedItems, setSelectedItems } = useContext(
+    SelectedAllItemsContext
+  );
+  const { selectItem: item, setSelectItem } = useContext(SelectItemContext);
 
-const IngredientDetails = ({
-  item,
-  addElementInSelected,
-  onCloseModal,
-}: IProps) => {
+  const addElementInSelected = (item: IBurderIngredient) => {
+    setSelectedItems([...selectedItems, item]);
+  };
+
+  if (!item) return null;
+
   const addIngredientInBoorger = () => {
     addElementInSelected(item);
-    onCloseModal();
+    setSelectItem(null);
   };
 
   return (
