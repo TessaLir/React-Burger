@@ -6,7 +6,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
 import styleClass from "./modal.module.css";
-import { SelectItemContext } from "../../services/app-context";
+import { SelectItemContext, ShowModal } from "../../services/app-context";
 
 interface IProps {
   children: any;
@@ -15,8 +15,15 @@ interface IProps {
 const portal = document.getElementById("portal");
 
 const Modal = ({ children }: IProps) => {
-  const { setSelectItem } = useContext(SelectItemContext);
-  const onClose = useCallback(() => setSelectItem(null), [setSelectItem]);
+  const { selectItem, setSelectItem } = useContext(SelectItemContext);
+  const { toggleShowModal } = useContext(ShowModal);
+  const onClose = useCallback(() => {
+    if (selectItem) {
+      setSelectItem(null);
+    } else {
+      toggleShowModal(false);
+    }
+  }, [selectItem, setSelectItem, toggleShowModal]);
 
   useEffect(() => {
     const closeByEscape = (e: KeyboardEvent) => {

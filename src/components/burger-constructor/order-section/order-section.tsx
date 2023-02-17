@@ -9,6 +9,7 @@ import {
   OrderDetailsContext,
   SelectBunContext,
   SelectedAllItemsContext,
+  ShowModal,
 } from "../../../services/app-context";
 import IResponseOrderDetail from "../../../models/response-order-detail";
 import OrderDetails from "../../order-details/order-details";
@@ -47,23 +48,32 @@ const OrderSection = () => {
 
   return (
     <section className={`${payment} mt-10 pr-10`}>
-      <div className={`${payment_currency} mr-10`}>
-        <p className="text text_type_digits-default pr-2">
-          {[...selectedItems, bun, bun].reduce(
-            (summ, item) => summ + item.price,
-            0
-          )}
-        </p>
-        <CurrencyIcon type="primary" />
-      </div>
-      <Button htmlType="button" type="primary" size="large" onClick={sendOrder}>
-        Оформить заказ
-      </Button>
-      {isOpenModal && (
-        <Modal>
-          <OrderDetails />
-        </Modal>
-      )}
+      <ShowModal.Provider
+        value={{ isShowModal: isOpenModal, toggleShowModal: setOpenModal }}
+      >
+        <div className={`${payment_currency} mr-10`}>
+          <p className="text text_type_digits-default pr-2">
+            {[...selectedItems, bun, bun].reduce(
+              (summ, item) => summ + item.price,
+              0
+            )}
+          </p>
+          <CurrencyIcon type="primary" />
+        </div>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          onClick={sendOrder}
+        >
+          Оформить заказ
+        </Button>
+        {isOpenModal && (
+          <Modal>
+            <OrderDetails />
+          </Modal>
+        )}
+      </ShowModal.Provider>
     </section>
   );
 };

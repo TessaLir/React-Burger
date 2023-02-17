@@ -8,7 +8,6 @@ import {
 import BunView from "./bun-view/bun-view";
 import OrderSection from "./order-section/order-section";
 import {
-  DataContext,
   SelectBunContext,
   SelectedAllItemsContext,
 } from "../../services/app-context";
@@ -16,7 +15,6 @@ import {
 import styleClass from "./burger-constructor.module.css";
 
 const BurgerConstructor = () => {
-  const data = useContext(DataContext);
   const { selectedItems, setSelectedItems } = useContext(
     SelectedAllItemsContext
   );
@@ -45,8 +43,6 @@ const BurgerConstructor = () => {
         что то не найдена булочка
       </h3>
     );
-
-  const bun = data[0];
 
   return (
     <article className={`${container} pt-25 pl-4 pr-4`}>

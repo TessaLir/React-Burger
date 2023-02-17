@@ -13,6 +13,11 @@ export const SelectItemContext = createContext<{
   setSelectItem: Dispatch<SetStateAction<IBurderIngredient | null>>;
 }>({ selectItem: null, setSelectItem: () => {} });
 
+export const ShowModal = createContext<{
+  isShowModal: boolean;
+  toggleShowModal: Dispatch<SetStateAction<boolean>>;
+}>({ isShowModal: false, toggleShowModal: (prev) => !prev });
+
 export const SelectBunContext = createContext<{
   fixedBun: IBurderIngredient | null;
   setFixedBun: Dispatch<SetStateAction<IBurderIngredient | null>>;
