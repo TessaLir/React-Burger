@@ -5,13 +5,14 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import IBurderIngredient from "../../../../models/byrger-ingredient";
-
-import styleClass from "./burger-ingredients-item.module.css";
 import {
+  SelectBunContext,
   SelectedAllItemsContext,
   SelectItemContext,
 } from "../../../../services/app-context";
+import IBurderIngredient from "../../../../models/byrger-ingredient";
+
+import styleClass from "./burger-ingredients-item.module.css";
 
 interface IProps {
   item: IBurderIngredient;
@@ -22,8 +23,12 @@ const BurgerIngredientsItem = ({ item }: IProps) => {
 
   const { selectedItems } = useContext(SelectedAllItemsContext);
   const { setSelectItem } = useContext(SelectItemContext);
+  const { fixedBun } = useContext(SelectBunContext);
 
-  const selectedCount = selectedItems.filter((el) => el._id === _id).length;
+  const selectedCount =
+    fixedBun && fixedBun._id === item._id
+      ? 2
+      : selectedItems.filter((el) => el._id === _id).length;
 
   return (
     <article

@@ -4,21 +4,27 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import IBurderIngredient from "../../models/byrger-ingredient";
 import InfoItem from "./info-item/info-item";
-
-import styleClass from "./ingredient-details.module.css";
 import {
+  SelectBunContext,
   SelectedAllItemsContext,
   SelectItemContext,
 } from "../../services/app-context";
+
+import styleClass from "./ingredient-details.module.css";
 
 const IngredientDetails = () => {
   const { selectedItems, setSelectedItems } = useContext(
     SelectedAllItemsContext
   );
   const { selectItem: item, setSelectItem } = useContext(SelectItemContext);
+  const { setFixedBun } = useContext(SelectBunContext);
 
   const addElementInSelected = (item: IBurderIngredient) => {
-    setSelectedItems([...selectedItems, item]);
+    if (item.type === "bun") {
+      setFixedBun(item);
+    } else {
+      setSelectedItems([...selectedItems, item]);
+    }
   };
 
   if (!item) return null;
