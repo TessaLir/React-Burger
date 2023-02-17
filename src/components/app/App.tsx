@@ -12,12 +12,15 @@ import {
   DataContext,
   SelectBunContext,
   SelectedAllItemsContext,
+  OrderDetailsContext,
 } from "../../services/app-context";
+import IResponseOrderDetail from "../../models/response-order-detail";
 
 const App = () => {
   const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
   const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
+  const [orderDetail, setOrderDetail] = useState<IResponseOrderDetail | null>(null);
 
   const [isLoadData, setIsLoadData] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -69,8 +72,10 @@ const App = () => {
           <SelectBunContext.Provider
             value={{ fixedBun: fixedBun, setFixedBun: setFixedBun }}
           >
-            <AppHeader />
-            {content}
+            <OrderDetailsContext.Provider value={{orderDetail: orderDetail, setOrderDetail: setOrderDetail}}>
+              <AppHeader />
+              {content}
+            </OrderDetailsContext.Provider>
           </SelectBunContext.Provider>
         </SelectedAllItemsContext.Provider>
       </DataContext.Provider>
