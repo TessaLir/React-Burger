@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import IBurderIngredient from "../../../models/byrger-ingredient";
 import ITabItem from "../../../models/tab-item";
@@ -18,10 +18,12 @@ const BurgerIngredientsList = ({ tab }: IProps) => {
 
   const [selectItem, setSelectItem] = useState<IBurderIngredient | null>(null);
 
+  const contextIngridientItems = useMemo(() => {
+    return { selectItem, setSelectItem };
+  }, [selectItem, setSelectItem]);
+
   return (
-    <SelectItemContext.Provider
-      value={{ selectItem: selectItem, setSelectItem: setSelectItem }}
-    >
+    <SelectItemContext.Provider value={contextIngridientItems}>
       <article>
         <h3 className="text text_type_main-large mb-5">{tab.text}</h3>
         <section className={styleClass.list}>

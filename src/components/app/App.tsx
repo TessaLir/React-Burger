@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import AppHeader from "../app-header/app-header";
 import IBurderIngredient from "../../models/byrger-ingredient";
@@ -47,6 +47,18 @@ const App = () => {
     setIsLoadData(false);
   };
 
+  const contextAllItems = useMemo(() => {
+    return { selectedItems, setSelectedItems };
+  }, [selectedItems, setSelectedItems]);
+
+  const contextSelectedBun = useMemo(() => {
+    return { fixedBun, setFixedBun };
+  }, [fixedBun, setFixedBun]);
+
+  const contextSelectedDetail = useMemo(() => {
+    return { orderDetail, setOrderDetail };
+  }, [orderDetail, setOrderDetail]);
+
   const content =
     data.length === 0 ? (
       <h3
@@ -59,18 +71,9 @@ const App = () => {
       <main>
         <div className={styleClass.container}>
           <DataContext.Provider value={data}>
-            <SelectedAllItemsContext.Provider
-              value={{ selectedItems, setSelectedItems }}
-            >
-              <SelectBunContext.Provider
-                value={{ fixedBun: fixedBun, setFixedBun: setFixedBun }}
-              >
-                <OrderDetailsContext.Provider
-                  value={{
-                    orderDetail: orderDetail,
-                    setOrderDetail: setOrderDetail,
-                  }}
-                >
+            <SelectedAllItemsContext.Provider value={contextAllItems}>
+              <SelectBunContext.Provider value={contextSelectedBun}>
+                <OrderDetailsContext.Provider value={contextSelectedDetail}>
                   <BurgerIngredients />
                   <BurgerConstructor />
                 </OrderDetailsContext.Provider>
