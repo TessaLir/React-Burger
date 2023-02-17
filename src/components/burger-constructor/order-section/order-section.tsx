@@ -25,6 +25,9 @@ const OrderSection = () => {
   const { setOrderDetail } = useContext(OrderDetailsContext);
 
   const [isOpenModal, setOpenModal] = useState(false);
+  const [sendOrderErrorMessage, setSendOrderErrorMessage] = useState<
+    string | null
+  >(null);
 
   if (!bun) return null;
 
@@ -41,7 +44,8 @@ const OrderSection = () => {
         setOpenModal(true);
       })
       .catch((error) => {
-        console.log(error);
+        setSendOrderErrorMessage(error.message);
+        setOpenModal(true);
         // setHasError(true) // TODO тут потом будем использовать какой ни будь Redux для проброса состояния...
       });
   };
@@ -70,7 +74,13 @@ const OrderSection = () => {
         </Button>
         {isOpenModal && (
           <Modal>
-            <OrderDetails />
+            {!sendOrderErrorMessage ? (
+              <OrderDetails />
+            ) : (
+              <h3 className={styleClass.error}>
+                Произошла ошибка: {sendOrderErrorMessage}
+              </h3>
+            )}
           </Modal>
         )}
       </ShowModal.Provider>

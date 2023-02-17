@@ -18,8 +18,8 @@ async function fetchSendOrder(body: IRequestOrder) {
 async function checkResponse(res: Response) {
   return res.ok
     ? res.json()
-    : res.json().then((err) => {
-        throw new Error(`ошибка получения данных: ${err}`);
+    : res.json().catch((err) => {
+        return Promise.reject(err);
       });
 }
 

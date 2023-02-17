@@ -9,3 +9,8 @@
     justify-content: center;
     align-items: center;
 }
+
+.error {
+    padding: 64px 24px 36px 24px;
+    color: red;
+}
