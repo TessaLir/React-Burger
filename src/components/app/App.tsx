@@ -7,7 +7,6 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import IResponseOrderDetail from "../../models/response-order-detail";
 import { getBurgerIngredient } from "../../api/burger-api";
 import {
-  DataContext,
   SelectBunContext,
   SelectedAllItemsContext,
   OrderDetailsContext,
@@ -77,16 +76,14 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <DataContext.Provider value={data}>
-            <SelectedAllItemsContext.Provider value={contextAllItems}>
-              <SelectBunContext.Provider value={contextSelectedBun}>
-                <OrderDetailsContext.Provider value={contextSelectedDetail}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </OrderDetailsContext.Provider>
-              </SelectBunContext.Provider>
-            </SelectedAllItemsContext.Provider>
-          </DataContext.Provider>
+          <SelectedAllItemsContext.Provider value={contextAllItems}>
+            <SelectBunContext.Provider value={contextSelectedBun}>
+              <OrderDetailsContext.Provider value={contextSelectedDetail}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </OrderDetailsContext.Provider>
+            </SelectBunContext.Provider>
+          </SelectedAllItemsContext.Provider>
         </div>
       </main>
     );

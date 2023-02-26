@@ -1,11 +1,13 @@
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { useSelector } from "react-redux/es/exports";
 
 import IBurderIngredient from "../../../models/byrger-ingredient";
 import ITabItem from "../../../models/tab-item";
-import { DataContext, SelectItemContext } from "../../../services/app-context";
+import { SelectItemContext } from "../../../services/app-context";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
-import Modal from "../../modal/modal";
 import BurgerIngredientsItem from "./burger-ingredients-item/burger-ingredients-item";
+import { dataSelector } from "../../../services/selectors";
+import Modal from "../../modal/modal";
 
 import styleClass from "./burger-ingredients-list.module.css";
 
@@ -14,7 +16,7 @@ interface IProps {
 }
 
 const BurgerIngredientsList = ({ tab }: IProps) => {
-  const data = useContext(DataContext).filter((el) => el.type === tab.key);
+  const data = useSelector(dataSelector);
 
   const [selectItem, setSelectItem] = useState<IBurderIngredient | null>(null);
 
