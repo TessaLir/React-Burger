@@ -2,6 +2,8 @@ import {
   INGREDIENTS_DATA,
   SET_INGREDIENTS_DATA,
   INGREDIENTS_SELECTED,
+  SELECT_INGREDIENT,
+  SET_SELECT_INGREDIENT,
   ADD_IN_INGREDIENTS_SELECTED,
   REMOVE_ONE_INGREDIENTS_SELECTED,
   INGREDIENT_INFO,
@@ -14,6 +16,7 @@ export const initialState: IStore = {
   data: [],
   selectedItems: [],
   orderList: [],
+  selectItem: null,
 };
 
 export const baseReducer = (state = initialState, action: IAction) => {
@@ -45,6 +48,11 @@ export const baseReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         data: [...prevItems, ...nextItems],
+      };
+    case SET_SELECT_INGREDIENT:
+      return {
+        ...state,
+        selectItem: action.ingredient,
       };
     default:
       return state;

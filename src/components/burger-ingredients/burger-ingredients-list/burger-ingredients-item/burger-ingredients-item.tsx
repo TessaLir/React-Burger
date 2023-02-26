@@ -5,15 +5,13 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import {
-  SelectBunContext,
-  SelectItemContext,
-} from "../../../../services/app-context";
+import { SelectBunContext } from "../../../../services/app-context";
 import IBurderIngredient from "../../../../models/byrger-ingredient";
 
 import styleClass from "./burger-ingredients-item.module.css";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectedSelector } from "../../../../services/selectors";
+import { baseActionCreators } from "../../../../services/action-creators";
 
 interface IProps {
   item: IBurderIngredient;
@@ -21,9 +19,9 @@ interface IProps {
 
 const BurgerIngredientsItem = ({ item }: IProps) => {
   const { _id, name, price, image } = item;
+  const dispatch = useDispatch();
   const selectedItems = useSelector(selectedSelector);
 
-  const { setSelectItem } = useContext(SelectItemContext);
   const { fixedBun } = useContext(SelectBunContext);
 
   const selectedCount =
@@ -34,7 +32,7 @@ const BurgerIngredientsItem = ({ item }: IProps) => {
   return (
     <article
       className={`${styleClass.ingredient} mt-6 mb-10 ml-4 mr-3`}
-      onClick={() => setSelectItem(item)}
+      onClick={() => dispatch(baseActionCreators.setSelectItem(item))}
     >
       <div className={`${styleClass.ingredient_top} pb-1 pl-4 pr-4`}>
         {selectedCount === 0 ? null : (

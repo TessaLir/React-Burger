@@ -2,16 +2,16 @@ import { Dispatch, createContext, SetStateAction } from "react";
 import IBurderIngredient from "../models/byrger-ingredient";
 import IResponseOrderDetail from "../models/response-order-detail";
 
-export const DataContext = createContext<IBurderIngredient[]>([]);
+// export const DataContext = createContext<IBurderIngredient[]>([]);
 // export const SelectedAllItemsContext = createContext<{
 //   selectedItems: IBurderIngredient[];
 //   setSelectedItems: Dispatch<SetStateAction<IBurderIngredient[]>>;
 // }>({ selectedItems: [], setSelectedItems: () => {} });
 
-export const SelectItemContext = createContext<{
-  selectItem: IBurderIngredient | null;
-  setSelectItem: Dispatch<SetStateAction<IBurderIngredient | null>>;
-}>({ selectItem: null, setSelectItem: () => {} });
+// export const SelectItemContext = createContext<{
+//   selectItem: IBurderIngredient | null;
+//   setSelectItem: Dispatch<SetStateAction<IBurderIngredient | null>>;
+// }>({ selectItem: null, setSelectItem: () => {} });
 
 export const ShowModal = createContext<{
   isShowModal: boolean;

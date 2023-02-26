@@ -4,4 +4,5 @@ export interface IStore {
   data: IBurderIngredient[];
   selectedItems: IBurderIngredient[];
   orderList: IBurderIngredient[];
+  selectItem: IBurderIngredient | undefined | null;
 }

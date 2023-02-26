@@ -3,9 +3,12 @@ import ReactDOM from "react-dom";
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
-import { SelectItemContext, ShowModal } from "../../services/app-context";
+import { ShowModal } from "../../services/app-context";
 
 import styleClass from "./modal.module.css";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { selecteItem } from "../../services/selectors";
+import { baseActionCreators } from "../../services/action-creators";
 
 interface IProps {
   children: any;
@@ -14,15 +17,18 @@ interface IProps {
 const portal = document.getElementById("portal");
 
 const Modal = ({ children }: IProps) => {
-  const { selectItem, setSelectItem } = useContext(SelectItemContext);
+  const dispatch = useDispatch();
+  const selectItem = useSelector(selecteItem);
+
+  // const { selectItem, setSelectItem } = useContext(SelectItemContext);
   const { toggleShowModal } = useContext(ShowModal);
   const onClose = useCallback(() => {
-    if (selectItem) {
-      setSelectItem(null);
-    } else {
-      toggleShowModal(false);
-    }
-  }, [selectItem, setSelectItem, toggleShowModal]);
+    // if (selectItem) {
+      dispatch(baseActionCreators.setSelectItem(null));
+    // } else {
+    //   toggleShowModal(false);
+    // }
+  }, [dispatch, selectItem, toggleShowModal]);
 
   useEffect(() => {
     const closeByEscape = (e: KeyboardEvent) => {
