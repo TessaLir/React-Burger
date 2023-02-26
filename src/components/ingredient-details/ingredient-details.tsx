@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import IBurderIngredient from "../../models/byrger-ingredient";
 import InfoItem from "./info-item/info-item";
-import { SelectBunContext } from "../../services/app-context";
 
 import styleClass from "./ingredient-details.module.css";
 import { useDispatch, useSelector } from "react-redux/es/exports";
@@ -14,11 +13,11 @@ const IngredientDetails = () => {
   const dispatch = useDispatch();
   const item = useSelector(selecteItem);
 
-  const { setFixedBun } = useContext(SelectBunContext);
+  // const { setFixedBun } = useContext(SelectBunContext);
 
   const addElementInSelected = (item: IBurderIngredient) => {
     if (item.type === "bun") {
-      setFixedBun(item);
+      dispatch(baseActionCreators.setSelectBun(item))
     } else {
       dispatch(baseActionCreators.addInSelectedItems(item));
     }

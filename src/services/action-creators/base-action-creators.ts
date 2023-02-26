@@ -4,6 +4,8 @@ import {
   INGREDIENTS_SELECTED,
   SELECT_INGREDIENT,
   SET_SELECT_INGREDIENT,
+  SELECT_BUN,
+  SET_SELECT_BUN,
   ADD_IN_INGREDIENTS_SELECTED,
   REMOVE_ONE_INGREDIENTS_SELECTED,
   INGREDIENT_INFO,
@@ -36,6 +38,13 @@ export const baseActionCreators = {
   }),
   setSelectItem: (ingredient: IBurderIngredient | null) => ({
     type: SET_SELECT_INGREDIENT,
+    ingredient,
+  }),
+  selectBun: () => ({
+    type: SELECT_BUN,
+  }),
+  setSelectBun: (ingredient: IBurderIngredient) => ({
+    type: SET_SELECT_BUN,
     ingredient,
   }),
   getOrderList: () => ({

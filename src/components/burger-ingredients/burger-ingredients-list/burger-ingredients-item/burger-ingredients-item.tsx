@@ -1,16 +1,15 @@
-import { useContext } from "react";
+import React from "react";
 
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { SelectBunContext } from "../../../../services/app-context";
 import IBurderIngredient from "../../../../models/byrger-ingredient";
 
 import styleClass from "./burger-ingredients-item.module.css";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { selectedSelector } from "../../../../services/selectors";
+import { selecteBun, selectedSelector } from "../../../../services/selectors";
 import { baseActionCreators } from "../../../../services/action-creators";
 
 interface IProps {
@@ -21,8 +20,7 @@ const BurgerIngredientsItem = ({ item }: IProps) => {
   const { _id, name, price, image } = item;
   const dispatch = useDispatch();
   const selectedItems = useSelector(selectedSelector);
-
-  const { fixedBun } = useContext(SelectBunContext);
+  const fixedBun = useSelector(selecteBun);
 
   const selectedCount =
     fixedBun && fixedBun._id === item._id

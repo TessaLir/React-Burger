@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { SelectBunContext } from "../../../services/app-context";
 
 import styleClass from "./bun-view.module.css";
+import { useSelector } from "react-redux/es/exports";
+import { selecteBun } from "../../../services/selectors";
 
 interface IProps {
   position: "top" | "bottom";
 }
 
 const BunVuew = ({ position }: IProps) => {
-  const { fixedBun } = useContext(SelectBunContext);
+  const fixedBun = useSelector(selecteBun);
 
   if (!fixedBun) return null;
 

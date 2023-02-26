@@ -1,5 +1,5 @@
 import { Dispatch, createContext, SetStateAction } from "react";
-import IBurderIngredient from "../models/byrger-ingredient";
+// import IBurderIngredient from "../models/byrger-ingredient";
 import IResponseOrderDetail from "../models/response-order-detail";
 
 // export const DataContext = createContext<IBurderIngredient[]>([]);
@@ -18,10 +18,10 @@ export const ShowModal = createContext<{
   toggleShowModal: Dispatch<SetStateAction<boolean>>;
 }>({ isShowModal: false, toggleShowModal: (prev) => !prev });
 
-export const SelectBunContext = createContext<{
-  fixedBun: IBurderIngredient | null;
-  setFixedBun: Dispatch<SetStateAction<IBurderIngredient | null>>;
-}>({ fixedBun: null, setFixedBun: () => {} });
+// export const SelectBunContext = createContext<{
+//   fixedBun: IBurderIngredient | null;
+//   setFixedBun: Dispatch<SetStateAction<IBurderIngredient | null>>;
+// }>({ fixedBun: null, setFixedBun: () => {} });
 
 export const OrderDetailsContext = createContext<{
   orderDetail: IResponseOrderDetail | null;

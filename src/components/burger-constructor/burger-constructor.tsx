@@ -7,18 +7,16 @@ import {
 
 import BunView from "./bun-view/bun-view";
 import OrderSection from "./order-section/order-section";
-import { SelectBunContext } from "../../services/app-context";
 
 import styleClass from "./burger-constructor.module.css";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { selectedSelector } from "../../services/selectors";
+import { selecteBun, selectedSelector } from "../../services/selectors";
 import { baseActionCreators } from "../../services/action-creators";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(selectedSelector);
-
-  const { fixedBun } = useContext(SelectBunContext);
+  const fixedBun = useSelector(selecteBun);
 
   const {
     element,
