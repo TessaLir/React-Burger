@@ -8,7 +8,6 @@ import {
 import {
   OrderDetailsContext,
   SelectBunContext,
-  SelectedAllItemsContext,
   ShowModal,
 } from "../../../services/app-context";
 import IResponseOrderDetail from "../../../models/response-order-detail";
@@ -17,10 +16,14 @@ import Modal from "../../modal/modal";
 import { fetchSendOrder } from "../../../api/burger-api";
 
 import styleClass from "./order-section.module.css";
+import { useSelector } from "react-redux/es/exports";
+import { selectedSelector } from "../../../services/selectors";
 
 const OrderSection = () => {
+  const selectedItems = useSelector(selectedSelector);
+
   const { payment, payment_currency } = styleClass;
-  const { selectedItems } = useContext(SelectedAllItemsContext);
+  // const { selectedItems } = useContext(SelectedAllItemsContext);
   const { fixedBun: bun } = useContext(SelectBunContext);
   const { setOrderDetail } = useContext(OrderDetailsContext);
 

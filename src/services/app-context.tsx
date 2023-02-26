@@ -3,10 +3,10 @@ import IBurderIngredient from "../models/byrger-ingredient";
 import IResponseOrderDetail from "../models/response-order-detail";
 
 export const DataContext = createContext<IBurderIngredient[]>([]);
-export const SelectedAllItemsContext = createContext<{
-  selectedItems: IBurderIngredient[];
-  setSelectedItems: Dispatch<SetStateAction<IBurderIngredient[]>>;
-}>({ selectedItems: [], setSelectedItems: () => {} });
+// export const SelectedAllItemsContext = createContext<{
+//   selectedItems: IBurderIngredient[];
+//   setSelectedItems: Dispatch<SetStateAction<IBurderIngredient[]>>;
+// }>({ selectedItems: [], setSelectedItems: () => {} });
 
 export const SelectItemContext = createContext<{
   selectItem: IBurderIngredient | null;

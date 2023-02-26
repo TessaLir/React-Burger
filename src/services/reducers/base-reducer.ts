@@ -35,7 +35,7 @@ export const baseReducer = (state = initialState, action: IAction) => {
       if (!action.ingredient) return state;
       return {
         ...state,
-        data: [...state.data, action.ingredient],
+        selectedItems: [...state.selectedItems, action.ingredient],
       };
     case REMOVE_ONE_INGREDIENTS_SELECTED:
       //TODO По хорошему если в экшен не передан индекс удаляемого ингредиента, надо вызывать ошиюку.

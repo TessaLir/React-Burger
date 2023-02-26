@@ -5,16 +5,16 @@ import IBurderIngredient from "../../models/byrger-ingredient";
 import InfoItem from "./info-item/info-item";
 import {
   SelectBunContext,
-  SelectedAllItemsContext,
   SelectItemContext,
 } from "../../services/app-context";
 
 import styleClass from "./ingredient-details.module.css";
+import { useDispatch } from "react-redux/es/exports";
+import { baseActionCreators } from "../../services/action-creators";
 
 const IngredientDetails = () => {
-  const { selectedItems, setSelectedItems } = useContext(
-    SelectedAllItemsContext
-  );
+  const dispatch = useDispatch();
+
   const { selectItem: item, setSelectItem } = useContext(SelectItemContext);
   const { setFixedBun } = useContext(SelectBunContext);
 
@@ -22,7 +22,7 @@ const IngredientDetails = () => {
     if (item.type === "bun") {
       setFixedBun(item);
     } else {
-      setSelectedItems([...selectedItems, item]);
+      dispatch(baseActionCreators.addInSelectedItems(item));
     }
   };
 

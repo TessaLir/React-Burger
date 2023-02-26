@@ -7,12 +7,13 @@ import {
 
 import {
   SelectBunContext,
-  SelectedAllItemsContext,
   SelectItemContext,
 } from "../../../../services/app-context";
 import IBurderIngredient from "../../../../models/byrger-ingredient";
 
 import styleClass from "./burger-ingredients-item.module.css";
+import { useSelector } from "react-redux/es/exports";
+import { selectedSelector } from "../../../../services/selectors";
 
 interface IProps {
   item: IBurderIngredient;
@@ -20,8 +21,8 @@ interface IProps {
 
 const BurgerIngredientsItem = ({ item }: IProps) => {
   const { _id, name, price, image } = item;
+  const selectedItems = useSelector(selectedSelector);
 
-  const { selectedItems } = useContext(SelectedAllItemsContext);
   const { setSelectItem } = useContext(SelectItemContext);
   const { fixedBun } = useContext(SelectBunContext);
 

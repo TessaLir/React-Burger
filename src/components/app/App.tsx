@@ -8,7 +8,6 @@ import IResponseOrderDetail from "../../models/response-order-detail";
 import { getBurgerIngredient } from "../../api/burger-api";
 import {
   SelectBunContext,
-  SelectedAllItemsContext,
   OrderDetailsContext,
 } from "../../services/app-context";
 
@@ -18,12 +17,9 @@ import { dataSelector } from "../../services/selectors";
 import { baseActionCreators } from "../../services/action-creators";
 
 const App = () => {
-
   const dispatch = useDispatch();
   const data = useSelector(dataSelector);
 
-  // const [data, setData] = useState<IBurderIngredient[]>([]);
-  const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
   const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
   const [orderDetail, setOrderDetail] = useState<IResponseOrderDetail | null>(
     null
@@ -53,10 +49,6 @@ const App = () => {
     setIsLoadData(false);
   };
 
-  const contextAllItems = useMemo(() => {
-    return { selectedItems, setSelectedItems };
-  }, [selectedItems, setSelectedItems]);
-
   const contextSelectedBun = useMemo(() => {
     return { fixedBun, setFixedBun };
   }, [fixedBun, setFixedBun]);
@@ -76,14 +68,12 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <SelectedAllItemsContext.Provider value={contextAllItems}>
-            <SelectBunContext.Provider value={contextSelectedBun}>
-              <OrderDetailsContext.Provider value={contextSelectedDetail}>
-                <BurgerIngredients />
-                <BurgerConstructor />
-              </OrderDetailsContext.Provider>
-            </SelectBunContext.Provider>
-          </SelectedAllItemsContext.Provider>
+          <SelectBunContext.Provider value={contextSelectedBun}>
+            <OrderDetailsContext.Provider value={contextSelectedDetail}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </OrderDetailsContext.Provider>
+          </SelectBunContext.Provider>
         </div>
       </main>
     );
