@@ -5,7 +5,6 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import IResponseOrderDetail from "../../models/response-order-detail";
 import { getBurgerIngredient } from "../../api/burger-api";
-import { OrderDetailsContext } from "../../services/app-context";
 
 import styleClass from "./App.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,10 +16,6 @@ const App = () => {
   const data = useSelector(dataSelector);
   const fixedBun = useSelector(selecteBun);
 
-  const [orderDetail, setOrderDetail] = useState<IResponseOrderDetail | null>(
-    null
-  );
-
   const [isLoadData, setIsLoadData] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -29,7 +24,6 @@ const App = () => {
     await getBurgerIngredient()
       .then((data) => dispatch(baseActionCreators.setData(data.data)))
       .catch((error) => setHasError(true));
-
     setIsLoadData(false);
   }, [dispatch]);
 
@@ -43,15 +37,11 @@ const App = () => {
     if (!fixedBun) {
       dispatch(
         baseActionCreators.setSelectBun(
-          data.filter((el) => el.type === "bun")[0] 
+          data.filter((el) => el.type === "bun")[0]
         )
       );
     }
   }, [data, dispatch, fixedBun]);
-
-  const contextSelectedDetail = useMemo(() => {
-    return { orderDetail, setOrderDetail };
-  }, [orderDetail, setOrderDetail]);
 
   const content =
     data.length === 0 ? (
@@ -64,10 +54,8 @@ const App = () => {
     ) : (
       <main>
         <div className={styleClass.container}>
-          <OrderDetailsContext.Provider value={contextSelectedDetail}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </OrderDetailsContext.Provider>
+          <BurgerIngredients />
+          <BurgerConstructor />
         </div>
       </main>
     );

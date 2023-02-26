@@ -1,26 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { OrderDetailsContext, ShowModal } from "../../../services/app-context";
+import { ShowModal } from "../../../services/app-context";
 import IResponseOrderDetail from "../../../models/response-order-detail";
 import OrderDetails from "../../order-details/order-details";
 import Modal from "../../modal/modal";
 import { fetchSendOrder } from "../../../api/burger-api";
 
 import styleClass from "./order-section.module.css";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selecteBun, selectedSelector } from "../../../services/selectors";
+import { baseActionCreators } from "../../../services/action-creators";
 
 const OrderSection = () => {
+  const dispatch = useDispatch();
   const selectedItems = useSelector(selectedSelector);
   const bun = useSelector(selecteBun);
 
   const { payment, payment_currency } = styleClass;
-  const { setOrderDetail } = useContext(OrderDetailsContext);
 
   const [isOpenModal, setOpenModal] = useState(false);
   const [sendOrderErrorMessage, setSendOrderErrorMessage] = useState<
@@ -38,7 +39,7 @@ const OrderSection = () => {
 
     fetchSendOrder(apiData)
       .then((data: IResponseOrderDetail) => {
-        setOrderDetail(data);
+        dispatch(baseActionCreators.setOrderDetail(data));
         setOpenModal(true);
       })
       .catch((error) => {

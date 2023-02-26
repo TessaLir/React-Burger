@@ -20,14 +20,13 @@ const Modal = ({ children }: IProps) => {
   const dispatch = useDispatch();
   const selectItem = useSelector(selecteItem);
 
-  // const { selectItem, setSelectItem } = useContext(SelectItemContext);
   const { toggleShowModal } = useContext(ShowModal);
   const onClose = useCallback(() => {
-    // if (selectItem) {
+    if (selectItem) {
       dispatch(baseActionCreators.setSelectItem(null));
-    // } else {
-    //   toggleShowModal(false);
-    // }
+    } else {
+      toggleShowModal(false);
+    }
   }, [dispatch, selectItem, toggleShowModal]);
 
   useEffect(() => {

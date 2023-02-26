@@ -1,6 +1,6 @@
 import { Dispatch, createContext, SetStateAction } from "react";
 // import IBurderIngredient from "../models/byrger-ingredient";
-import IResponseOrderDetail from "../models/response-order-detail";
+// import IResponseOrderDetail from "../models/response-order-detail";
 
 // export const DataContext = createContext<IBurderIngredient[]>([]);
 // export const SelectedAllItemsContext = createContext<{
@@ -23,7 +23,7 @@ export const ShowModal = createContext<{
 //   setFixedBun: Dispatch<SetStateAction<IBurderIngredient | null>>;
 // }>({ fixedBun: null, setFixedBun: () => {} });
 
-export const OrderDetailsContext = createContext<{
-  orderDetail: IResponseOrderDetail | null;
-  setOrderDetail: Dispatch<SetStateAction<IResponseOrderDetail | null>>;
-}>({ orderDetail: null, setOrderDetail: () => {} });
+// export const OrderDetailsContext = createContext<{
+//   orderDetail: IResponseOrderDetail | null;
+//   setOrderDetail: Dispatch<SetStateAction<IResponseOrderDetail | null>>;
+// }>({ orderDetail: null, setOrderDetail: () => {} });

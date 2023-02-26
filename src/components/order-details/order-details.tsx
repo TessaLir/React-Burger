@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
-import { OrderDetailsContext } from "../../services/app-context";
+import React from "react";
+import { useSelector } from "react-redux/es/exports";
+import { orderDetailSelector } from "../../services/selectors";
 
 import svgDone from "./../../images/done.svg";
 
 import styleClass from "./order-details.module.css";
 
 const OrderDetails = () => {
-  const { orderDetail } = useContext(OrderDetailsContext);
+  const orderDetail = useSelector(orderDetailSelector);
 
   if (!orderDetail) return null;
 

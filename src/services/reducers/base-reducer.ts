@@ -7,16 +7,20 @@ import {
   ADD_IN_INGREDIENTS_SELECTED,
   REMOVE_ONE_INGREDIENTS_SELECTED,
   ORDER_LIST,
+  SET_ORDER_DETAIL,
 } from "../action-types";
 
 import { IAction, IStore } from "../models";
 
 export const initialState: IStore = {
   data: [],
+
   selectedItems: [],
-  orderList: [],
   selectItem: null,
   selectBun: null,
+
+  orderDetail: null,
+  orderList: [],
 };
 
 export const baseReducer = (state = initialState, action: IAction) => {
@@ -58,6 +62,11 @@ export const baseReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         selectBun: action.ingredient,
+      };
+    case SET_ORDER_DETAIL:
+      return {
+        ...state,
+        orderDetail: action.orderDetail,
       };
     default:
       return state;
