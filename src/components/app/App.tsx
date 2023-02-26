@@ -14,9 +14,16 @@ import {
 } from "../../services/app-context";
 
 import styleClass from "./App.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { dataSelector } from "../../services/selectors";
+import { baseActionCreators } from "../../services/action-creators";
 
 const App = () => {
-  const [data, setData] = useState<IBurderIngredient[]>([]);
+
+  const dispatch = useDispatch();
+  const data = useSelector(dataSelector);
+
+  // const [data, setData] = useState<IBurderIngredient[]>([]);
   const [selectedItems, setSelectedItems] = useState<IBurderIngredient[]>([]);
   const [fixedBun, setFixedBun] = useState<IBurderIngredient | null>(null);
   const [orderDetail, setOrderDetail] = useState<IResponseOrderDetail | null>(
@@ -41,7 +48,7 @@ const App = () => {
   const downloadData = async () => {
     setIsLoadData(true);
     await getBurgerIngredient()
-      .then((data) => setData(data.data))
+      .then((data) => dispatch(baseActionCreators.setData(data.data)))
       .catch((error) => setHasError(true));
 
     setIsLoadData(false);
