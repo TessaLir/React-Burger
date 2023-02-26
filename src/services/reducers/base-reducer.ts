@@ -8,6 +8,7 @@ import {
   REMOVE_ONE_INGREDIENTS_SELECTED,
   ORDER_LIST,
   SET_ORDER_DETAIL,
+  SET_SHOW_MODAL,
 } from "../action-types";
 
 import { IAction, IStore } from "../models";
@@ -21,6 +22,8 @@ export const initialState: IStore = {
 
   orderDetail: null,
   orderList: [],
+
+  isShowModal: false,
 };
 
 export const baseReducer = (state = initialState, action: IAction) => {
@@ -67,6 +70,11 @@ export const baseReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         orderDetail: action.orderDetail,
+      };
+    case SET_SHOW_MODAL:
+      return {
+        ...state,
+        isShowModal: action.isShowModal,
       };
     default:
       return state;

@@ -13,10 +13,10 @@ import { Dispatch, createContext, SetStateAction } from "react";
 //   setSelectItem: Dispatch<SetStateAction<IBurderIngredient | null>>;
 // }>({ selectItem: null, setSelectItem: () => {} });
 
-export const ShowModal = createContext<{
-  isShowModal: boolean;
-  toggleShowModal: Dispatch<SetStateAction<boolean>>;
-}>({ isShowModal: false, toggleShowModal: (prev) => !prev });
+// export const ShowModal = createContext<{
+//   isShowModal: boolean;
+//   toggleShowModal: Dispatch<SetStateAction<boolean>>;
+// }>({ isShowModal: false, toggleShowModal: (prev) => !prev });
 
 // export const SelectBunContext = createContext<{
 //   fixedBun: IBurderIngredient | null;

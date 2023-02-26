@@ -10,5 +10,7 @@ export interface IStore {
 
   orderDetail: IResponseOrderDetail | undefined | null;
 
+  isShowModal: Boolean | undefined;
+
   orderList: IBurderIngredient[];
 }

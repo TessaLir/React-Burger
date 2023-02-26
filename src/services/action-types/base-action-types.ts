@@ -14,6 +14,9 @@ export const SET_SELECT_BUN = "SET_SELECT_BUN";
 export const ORDER_DETAIL = "ORDER_DETAIL";
 export const SET_ORDER_DETAIL = "SET_ORDER_DETAIL";
 
+export const SHOW_MODAL = "SHOW_MODAL";
+export const SET_SHOW_MODAL = "SET_SHOW_MODAL";
+
 export const INGREDIENT_INFO = "INGREDIENT_INFO";
 
 export const ORDER_LIST = "ORDER_LIST";

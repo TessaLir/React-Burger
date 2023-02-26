@@ -7,3 +7,5 @@ export const selecteItem = (state: IStore) => state.selectItem;
 export const selecteBun = (state: IStore) => state.selectBun;
 
 export const orderDetailSelector = (state: IStore) => state.orderDetail;
+
+export const isShowModal = (state: IStore) => state.isShowModal;

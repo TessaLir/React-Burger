@@ -7,4 +7,5 @@ export interface IAction {
   index?: number;
   ingredient?: IBurderIngredient | null;
   orderDetail?: IResponseOrderDetail | null;
+  isShowModal?: Boolean;
 }

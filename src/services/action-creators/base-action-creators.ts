@@ -12,6 +12,8 @@ import {
   ORDER_LIST,
   ORDER_DETAIL,
   SET_ORDER_DETAIL,
+  SHOW_MODAL,
+  SET_SHOW_MODAL,
 } from "../action-types";
 
 import IBurderIngredient from "../../models/byrger-ingredient";
@@ -60,6 +62,14 @@ export const baseActionCreators = {
   setOrderDetail: (orderDetail: IResponseOrderDetail) => ({
     type: SET_ORDER_DETAIL,
     orderDetail,
+  }),
+
+  showModal: () => ({
+    type: SHOW_MODAL,
+  }),
+  setShowModal: (isShowModal: Boolean) => ({
+    type: SET_SHOW_MODAL,
+    isShowModal,
   }),
 
   getOrderList: () => ({
